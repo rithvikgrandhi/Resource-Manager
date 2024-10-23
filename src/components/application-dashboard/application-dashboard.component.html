@@ -1,0 +1,16 @@
+<div class="applicant-dashboard-card">
+    <h2>Applicant Dashboard</h2>
+
+    <div *ngIf="applicants.length === 0" class="no-applicants-message">
+        No applicants available.
+    </div>
+
+    <div class="applicant-cards" *ngIf="applicants.length > 0">
+        <div class="applicant-card" *ngFor="let applicant of applicants">
+            <h3>{{ applicant.fullName }}</h3>
+            <p><strong>Email:</strong> {{ applicant.email }}</p>
+            <p><strong>Phone:</strong> {{ applicant.phone }}</p>
+            <p><strong>Status:</strong> {{ applicant.status }}</p>
+        </div>
+    </div>
+</div>
