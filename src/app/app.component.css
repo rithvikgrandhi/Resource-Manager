@@ -1,0 +1,35 @@
+.navbar {
+    background-color: #00338D; /* Navbar background */
+    padding: 1%; /* Set padding to 0 on all sides */
+    color: white; /* Navbar text color */
+    display: flex; /* Use flexbox for alignment */
+    align-items: center; /* Center items vertically */
+}
+
+.Title{
+    padding-top: 1%;
+    padding-right: 1%;
+    margin-right: 1%;
+    font-family: 'HeadingFont';
+}
+
+.logo {
+    width: 9%; /* Adjust width as needed */
+    height: 9%; /* Maintain aspect ratio */
+    margin-right: 15px; /* Space between image and nav items */
+}
+
+.navbar nav ul {
+    list-style-type: none; /* Remove bullet points */
+    padding: 0; /* Remove default padding */
+}
+
+.navbar nav ul li {
+    display: inline; /* Inline list items */
+    margin-right: 15px; /* Space between links */
+}
+
+.navbar nav ul li a {
+    color: white; /* Link color */
+    text-decoration: none; /* Remove underline */
+}

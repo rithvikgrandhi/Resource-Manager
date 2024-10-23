@@ -1,0 +1,117 @@
+<form class="register-form" (ngSubmit)="onSubmit()" #registerForm="ngForm" novalidate>
+    <div class="register-card">
+        <h2>Register</h2>
+
+        <!-- Alert Message Display -->
+        <div *ngIf="registrationMessage" class="registration-message alert">
+            {{ registrationMessage }}
+        </div>
+
+        <!-- General Error Message for Incomplete Form -->
+        <div *ngIf="formSubmitted && registerForm.invalid" class="error-message">
+            Please fill in all required fields.
+        </div>
+
+        <div class="form-field">
+            <label for="firstName">First Name</label>
+            <input type="text" id="firstName" required [(ngModel)]="model.firstName" name="firstName" />
+            <div class="error-message" *ngIf="registerForm.controls['firstName']?.invalid && (registerForm.controls['firstName']?.touched || registerForm.controls['firstName']?.dirty)">
+                First name is required.
+            </div>
+        </div>
+
+        <div class="form-field">
+            <label for="lastName">Last Name</label>
+            <input type="text" id="lastName" required [(ngModel)]="model.lastName" name="lastName" />
+            <div class="error-message" *ngIf="registerForm.controls['lastName']?.invalid && (registerForm.controls['lastName']?.touched || registerForm.controls['lastName']?.dirty)">
+                Last name is required.
+            </div>
+        </div>
+
+        <div class="form-field">
+            <label for="username">Username</label>
+            <input type="text" id="username" required [(ngModel)]="model.username" name="username" />
+            <div class="error-message" *ngIf="registerForm.controls['username']?.invalid && (registerForm.controls['username']?.touched || registerForm.controls['username']?.dirty)">
+                Username is required.
+            </div>
+        </div>
+
+        <div class="form-field">
+            <label for="phone">Phone Number</label>
+            <input type="text" id="phone" required [(ngModel)]="model.phone" name="phone" />
+            <div class="error-message" *ngIf="registerForm.controls['phone']?.invalid && (registerForm.controls['phone']?.touched || registerForm.controls['phone']?.dirty)">
+                Phone number is required.
+            </div>
+        </div>
+
+        <div class="form-field">
+            <label for="email">Email</label>
+            <input type="email" id="email" required [(ngModel)]="model.email" name="email" />
+            <div class="error-message" *ngIf="registerForm.controls['email']?.invalid && (registerForm.controls['email']?.touched || registerForm.controls['email']?.dirty)">
+                A valid email is required.
+            </div>
+        </div>
+
+        <div class="form-field">
+            <label for="password">Create Password</label>
+            <input type="password" id="password" required [(ngModel)]="model.password" name="password" 
+                   (focus)="showPasswordRules = true" (blur)="showPasswordRules = false" (input)="checkPassword()" />
+            <div class="error-message" *ngIf="registerForm.controls['password']?.invalid && (registerForm.controls['password']?.touched || registerForm.controls['password']?.dirty)">
+                Password is required.
+            </div>
+            <!-- Password Rules Box -->
+            <div *ngIf="showPasswordRules" class="password-rules-box">
+                <div [class.valid]="passwordLengthValid" [class.invalid]="!passwordLengthValid">
+                    <span [ngClass]="{'checked': passwordLengthValid, 'unchecked': !passwordLengthValid}">
+                        <span *ngIf="passwordLengthValid">&#10004;</span>
+                        <span *ngIf="!passwordLengthValid">&#10006;</span>
+                    </span> 
+                    1. Password length should be at least 8 characters long
+                </div>
+                <div [class.valid]="passwordHasNumber" [class.invalid]="!passwordHasNumber">
+                    <span [ngClass]="{'checked': passwordHasNumber, 'unchecked': !passwordHasNumber}">
+                        <span *ngIf="passwordHasNumber">&#10004;</span>
+                        <span *ngIf="!passwordHasNumber">&#10006;</span>
+                    </span>
+                    2. At least one number required
+                </div>
+                <div [class.valid]="passwordHasSpecialChar" [class.invalid]="!passwordHasSpecialChar">
+                    <span [ngClass]="{'checked': passwordHasSpecialChar, 'unchecked': !passwordHasSpecialChar}">
+                        <span *ngIf="passwordHasSpecialChar">&#10004;</span>
+                        <span *ngIf="!passwordHasSpecialChar">&#10006;</span>
+                    </span>
+                    3. At least one special character required (Eg: !, #, $, %, ^, &)
+                </div>
+                <div [class.valid]="passwordHasUppercase" [class.invalid]="!passwordHasUppercase">
+                    <span [ngClass]="{'checked': passwordHasUppercase, 'unchecked': !passwordHasUppercase}">
+                        <span *ngIf="passwordHasUppercase">&#10004;</span>
+                        <span *ngIf="!passwordHasUppercase">&#10006;</span>
+                    </span>
+                    4. At least one uppercase letter required
+                </div>
+                <div [class.valid]="passwordHasLowercase" [class.invalid]="!passwordHasLowercase">
+                    <span [ngClass]="{'checked': passwordHasLowercase, 'unchecked': !passwordHasLowercase}">
+                        <span *ngIf="passwordHasLowercase">&#10004;</span>
+                        <span *ngIf="!passwordHasLowercase">&#10006;</span>
+                    </span>
+                    5. At least one lowercase letter required
+                </div>
+            </div>
+        </div>
+
+        <div class="form-field">
+            <label for="confirmPassword">Confirm Password</label>
+            <input type="password" id="confirmPassword" required [(ngModel)]="model.confirmPassword" name="confirmPassword" (input)="checkPassword()" />
+            <div class="error-message" *ngIf="registerForm.controls['confirmPassword']?.invalid && (registerForm.controls['confirmPassword']?.touched || registerForm.controls['confirmPassword']?.dirty)">
+                Confirm password is required.
+            </div>
+            <div class="error-message" *ngIf="model.password !== model.confirmPassword">
+                Passwords must match.
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <button class="submit-button" type="submit" (click)="formSubmitted = true" [disabled]="registerForm.invalid || model.password !== model.confirmPassword">Register</button>
+        </div>
+    </div>
+</form>

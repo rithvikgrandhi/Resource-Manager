@@ -1,0 +1,33 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+@font-face {
+    font-family: 'Univers'; /* Change this to your font name */
+    src: url('./assets/fonts/UniversforKPMG-Light.ttf') format('truetype'); /* Update the file name */
+    font-weight: medium; /* Adjust as necessary */
+    font-style: normal; /* Adjust as necessary */
+}
+
+@font-face {
+    font-family: 'HeadingFont'; /* Change this to your font name */
+    src: url('./assets/fonts/kpmg-bold-webfont.45f0ddbff0ded68d.woff') format('woff'); /* Update the file name */
+    font-weight: normal; /* Adjust as necessary */
+    font-style: normal; /* Adjust as necessary */
+}
+
+@font-face {
+    font-family: 'Roboto Bold'; /* Change this to your font name */
+    src: url('./assets/fonts/roboto-bold-webfont.f10110bf1ef2243a.woff') format('woff'); /* Update the file name */
+    font-weight: normal; /* Adjust as necessary */
+    font-style: normal; /* Adjust as necessary */
+}
+
+@font-face {
+    font-family: 'Roboto Regular'; /* Change this to your font name */
+    src: url('./assets/fonts/roboto-regular-webfont.eac02a7ca7c3bd33.woff') format('woff'); /* Update the file name */
+    font-weight: normal; /* Adjust as necessary */
+    font-style: normal; /* Adjust as necessary */
+}

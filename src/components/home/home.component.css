@@ -1,0 +1,47 @@
+
+.heading{
+    font-family: 'HeadingFont';
+}
+.home {
+    font-family: 'Univers';
+    height: 100vh;
+    background-color: white;
+    /* Light background */
+    padding: 10px;
+}
+
+
+.explore-button {
+    background-color: #005EB8;
+    /* Button background */
+    color: white;
+    /* Button text color */
+    padding: 10px 15px;
+    /* Button padding */
+    border: none;
+    /* Remove border */
+    border-radius: 4px;
+    /* Rounded corners */
+    cursor: pointer;
+    /* Pointer cursor on hover */
+    transition: background-color 0.3s;
+    /* Smooth transition */
+}
+
+.explore-button:hover {
+    background-color: #0056b3;
+    /* Darker blue on hover */
+}
+
+.footer {
+    margin-top: 20px;
+    /* Space above footer */
+    text-align: center;
+    /* Center the footer text */
+    color: #555;
+    /* Footer text color */
+}
+
+h2 {
+    font-weight: bold;
+}
