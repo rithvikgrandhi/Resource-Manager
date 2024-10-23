@@ -1,0 +1,18 @@
+<div class="employee-dashboard-card">
+    <h2>Your Certification Requests</h2>
+
+    <div *ngIf="certificationRequests.length === 0" class="no-requests-message">
+        No certification requests submitted.
+    </div>
+
+    <div class="request-cards" *ngIf="certificationRequests.length > 0">
+        <div class="request-card" *ngFor="let request of certificationRequests">
+            <h3>{{ request.certificationName }}</h3>
+            <p><strong>Justification:</strong> {{ request.justification }}</p>
+            <p><strong>Status:</strong> {{ request.status }}</p>
+            <div class="request-date">
+                <strong>Requested On:</strong> {{ request.requestedDate | date:'shortDate' }}
+            </div>
+        </div>
+    </div>
+</div>

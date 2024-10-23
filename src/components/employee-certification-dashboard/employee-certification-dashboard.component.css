@@ -1,0 +1,42 @@
+.employee-dashboard-card {
+    max-width: 800px;
+    margin: 50px auto;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+h2 {
+    text-align: center;
+    font-family: 'HeadingFont';
+}
+
+.request-cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Two columns */
+    gap: 20px; /* Space between cards */
+}
+
+.request-card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 15px;
+    background-color: #f9f9f9;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+}
+
+.request-card h3 {
+    margin: 0 0 10px; /* Space below name */
+}
+
+.request-date {
+    margin-top: 10px; /* Space above date */
+    font-weight: bold;
+}
+
+.no-requests-message {
+    text-align: center;
+    color: #999;
+    margin-top: 20px;
+}
