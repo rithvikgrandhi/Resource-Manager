@@ -1,9 +1,11 @@
 .navbar {
     background-color: #00338D; /* Navbar background */
-    padding: 1%; /* Set padding to 0 on all sides */
+    padding-left: 1%; /* Set padding to 0 on all sides */
     color: white; /* Navbar text color */
     display: flex; /* Use flexbox for alignment */
     align-items: center; /* Center items vertically */
+    font-family: bodyfont;
+    font-weight: bold;
 }
 
 .Title{

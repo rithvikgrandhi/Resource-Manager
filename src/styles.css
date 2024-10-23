@@ -10,6 +10,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     font-weight: medium; /* Adjust as necessary */
     font-style: normal; /* Adjust as necessary */
 }
+@font-face {
+    font-family: 'bodyfont'; /* Change this to your font name */
+    src: url('./assets/fonts/icomoon.ttf') format('truetype'); /* Update the file name */
+    font-weight: medium; /* Adjust as necessary */
+    font-style: normal; /* Adjust as necessary */
+}
 
 @font-face {
     font-family: 'HeadingFont'; /* Change this to your font name */

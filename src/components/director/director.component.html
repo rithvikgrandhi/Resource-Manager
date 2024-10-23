@@ -1,0 +1,25 @@
+<div class="director-dashboard">
+    <h1>Director Dashboard</h1>
+
+    <form #requestForm="ngForm" (ngSubmit)="submitRequest(requestForm)">
+        <div>
+            <label for="project">Select Project:</label>
+            <select id="project" name="project" ngModel required>
+                <option value="" disabled>Select a project</option>
+                <option *ngFor="let project of projects" [value]="project.id">{{ project.name }}</option>
+            </select>
+        </div>
+
+        <div>
+            <label>Required Skills:</label>
+            <div *ngFor="let skill of skills">
+                <label [for]="skill.name">{{ skill.name }}</label>
+
+                <input type="number" [id]="skill.name" name="{{ skill.name }}Count" min=0 placeholder=0 ngModel />
+
+            </div>
+        </div>
+
+        <button type="submit">Submit Request</button>
+    </form>
+</div>
