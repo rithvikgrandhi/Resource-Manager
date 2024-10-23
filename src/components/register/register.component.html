@@ -2,12 +2,10 @@
     <div class="register-card">
         <h2>Register</h2>
 
-        <!-- Alert Message Display -->
         <div *ngIf="registrationMessage" class="registration-message alert">
             {{ registrationMessage }}
         </div>
 
-        <!-- General Error Message for Incomplete Form -->
         <div *ngIf="formSubmitted && registerForm.invalid" class="error-message">
             Please fill in all required fields.
         </div>
@@ -53,13 +51,26 @@
         </div>
 
         <div class="form-field">
+            <label for="role">Role</label>
+            <select id="role" required [(ngModel)]="model.role" name="role">
+                <option value="" disabled selected>Select your role</option>
+                <option value="HR">HR</option>
+                <option value="Applicant">Applicant</option>
+                <option value="Owner">Owner</option>
+                <option value="Employee">Employee</option>
+            </select>
+            <div class="error-message" *ngIf="registerForm.controls['role']?.invalid && (registerForm.controls['role']?.touched || registerForm.controls['role']?.dirty)">
+                Role selection is required.
+            </div>
+        </div>
+
+        <div class="form-field">
             <label for="password">Create Password</label>
             <input type="password" id="password" required [(ngModel)]="model.password" name="password" 
                    (focus)="showPasswordRules = true" (blur)="showPasswordRules = false" (input)="checkPassword()" />
             <div class="error-message" *ngIf="registerForm.controls['password']?.invalid && (registerForm.controls['password']?.touched || registerForm.controls['password']?.dirty)">
                 Password is required.
             </div>
-            <!-- Password Rules Box -->
             <div *ngIf="showPasswordRules" class="password-rules-box">
                 <div [class.valid]="passwordLengthValid" [class.invalid]="!passwordLengthValid">
                     <span [ngClass]="{'checked': passwordLengthValid, 'unchecked': !passwordLengthValid}">
