@@ -3,6 +3,9 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
+*{
+    font-family: 'Univers';
+}
 
 @font-face {
     font-family: 'Univers'; /* Change this to your font name */

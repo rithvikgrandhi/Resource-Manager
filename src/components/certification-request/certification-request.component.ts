@@ -5,11 +5,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-certification-request',
   standalone: true,
-  imports: [FormsModule, MatCardModule, MatFormFieldModule, MatInputModule, MatButtonModule],
+  imports: [FormsModule, MatCardModule,NgIf, MatFormFieldModule, MatInputModule, MatButtonModule],
   templateUrl: './certification-request.component.html',
   styleUrls: ['./certification-request.component.css']
 })

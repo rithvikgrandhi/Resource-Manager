@@ -14,24 +14,21 @@ import { ApplicationDashboardComponent } from '../components/application-dashboa
 import { ApplicantDashboardComponent } from '../components/applicant-dashboard/applicant-dashboard.component';
 
 export const routes: Routes = [
-    { path: '', redirectTo: '/home', pathMatch: 'full' },
-    { path: 'home', component: HomeComponent},
-    { path: 'about', component: AboutComponent},
-    { path: 'login', component: LoginComponent},
-    { path: 'contact', component: ContactusComponent},
-    { path: 'register', component: RegisterComponent},
-    { path: 'director', component: DirectorComponent},
-    { path: 'hrportal', component: HrportalComponent},
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: 'home', component: HomeComponent },
+  { path: 'about', component: AboutComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'contact', component: ContactusComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'director', component: DirectorComponent },
+  { path: 'hrportal', component: HrportalComponent },
 
-    { path: 'application', component: ApplicationComponent },
-    { path: 'request-certification', component: CertificationRequestComponent },
-    {
-      path: 'mycertifications',
-      component: EmployeeCertificationDashboardComponent,
-    },
-    { path: 'certifications', component: CertificationDashboardComponent },
-    { path: 'application-dashboard', component: ApplicationDashboardComponent },
-    { path: 'applicant-dashboard', component: ApplicantDashboardComponent },
-  
-    { path: '**', redirectTo: '/home' } // Catch-all route for non-existing routes
+  { path: 'application', component: ApplicationComponent },
+  { path: 'request-certification', component: CertificationRequestComponent },
+  { path: 'mycertifications',component: EmployeeCertificationDashboardComponent,},
+  { path: 'certifications', component: CertificationDashboardComponent },
+  { path: 'application-dashboard', component: ApplicationDashboardComponent },
+  { path: 'applicant-dashboard', component: ApplicantDashboardComponent },
+
+  { path: '**', redirectTo: '/home' } // Catch-all route for non-existing routes
 ];

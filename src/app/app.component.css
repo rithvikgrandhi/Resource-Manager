@@ -4,7 +4,7 @@
     color: white; /* Navbar text color */
     display: flex; /* Use flexbox for alignment */
     align-items: center; /* Center items vertically */
-    font-family: bodyfont;
+    font-family: 'Univers';
     font-weight: bold;
 }
 
