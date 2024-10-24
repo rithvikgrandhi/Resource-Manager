@@ -1,0 +1,46 @@
+<form class="job-post-form" (ngSubmit)="onSubmit()" #jobPostForm="ngForm" novalidate>
+    <div class="form-field">
+        <label for="title">Job Title</label>
+        <input type="text" id="title" required [(ngModel)]="jobPost.title" name="title" />
+        <div class="error-message" *ngIf="jobPostForm.controls['title']?.invalid && (jobPostForm.controls['title']?.touched || jobPostForm.controls['title']?.dirty)">
+            Job title is required.
+        </div>
+    </div>
+
+    <div class="form-field">
+        <label for="description">Job Description</label>
+        <textarea id="description" required [(ngModel)]="jobPost.description" name="description"></textarea>
+        <div class="error-message" *ngIf="jobPostForm.controls['description']?.invalid && (jobPostForm.controls['description']?.touched || jobPostForm.controls['description']?.dirty)">
+            Job description is required.
+        </div>
+    </div>
+
+    <div class="form-field">
+        <label for="skills">Skills Required</label>
+        <input type="text" id="skills" required [(ngModel)]="jobPost.skillsRequired" name="skills" />
+        <div class="error-message" *ngIf="jobPostForm.controls['skills']?.invalid && (jobPostForm.controls['skills']?.touched || jobPostForm.controls['skills']?.dirty)">
+            Skills required are required.
+        </div>
+    </div>
+
+    <div class="form-field">
+        <label for="numberOfPeople">Number of People Required</label>
+        <input type="number" id="numberOfPeople" required [(ngModel)]="jobPost.numberOfPeopleRequired" name="numberOfPeople" />
+        <div class="error-message" *ngIf="jobPostForm.controls['numberOfPeople']?.invalid && (jobPostForm.controls['numberOfPeople']?.touched || jobPostForm.controls['numberOfPeople']?.dirty)">
+            Number of people required is required.
+        </div>
+    </div>
+
+    <div class="form-field">
+        <label for="status">Status</label>
+        <select id="status" [(ngModel)]="jobPost.status" name="status">
+            <option value="Open">Open</option>
+            <option value="Closed">Closed</option>
+            <option value="Pending">Pending</option>
+        </select>
+    </div>
+
+    <div class="form-actions">
+        <button class="submit-button" type="submit" [disabled]="jobPostForm.invalid">Create Job Post</button>
+    </div>
+</form>
