@@ -23,7 +23,6 @@ export class ProjectsComponent {
    this.http.get("https://localhost:7177/api/ProjectDeets").subscribe((data)=>{
     this.deets = data
   });
-    console.log(this.deets.value)
 
 }
 

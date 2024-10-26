@@ -21,7 +21,7 @@ export class DirectorComponent {
     { name: 'Frontend' },
     { name: 'Backend' },
     { name: 'Database' },
-    { name: 'Full stack' },
+    { name: 'Fullstack' },
     { name: 'Cloud' },
   ];
 
@@ -42,6 +42,7 @@ export class DirectorComponent {
     this.dir_id = Number(localStorage.getItem('dir_id')) || 0;
     formdata.value['dir_id'] = this.dir_id;
 
+    console.log(formdata.value);
     this.res = {
       dirId: this.dir_id,
       projectId: Number(formdata.value.project_id),
@@ -49,10 +50,11 @@ export class DirectorComponent {
         frontend: formdata.value.FrontendCount,
         backend: formdata.value.BackendCount,
         database: formdata.value.DatabaseCount,
-        fullstack: formdata.value.FullStackCount,
+        fullstack: formdata.value.FullstackCount,
         cloud: formdata.value.CloudCount
       })
     };
+    console.log("check1",this.res);
 
     // Post the data
 

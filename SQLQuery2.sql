@@ -117,7 +117,7 @@ select * from certifications
 select * from director_requirements
 
 insert into director_requirements values (
-
+1,1,'12'
 );
 
 select * from project_deets
@@ -163,7 +163,7 @@ INSERT INTO available_emps (emp_id, skill) VALUES (30, 'Frontend');
 
 select count(*) from available_emps where skill='Database';
 
-select * from project_deets
+select * from certifications
 
 select * from 
 select * from director_requirements
@@ -174,7 +174,7 @@ insert into director_requirements values(
 select * from 
 
 
-select * from project_deets
+select * from available_emps
 
 insert into project_deets values(
 1, 1, 'mem1, m1m2'
@@ -317,3 +317,24 @@ INSERT INTO users VALUES
 ('zsmith', 'hashed_password_48', 'HR', 'Zach Smith', 'zach.smith@example.com', '5551110048'),
 ('cnguyen', 'hashed_password_49', 'Employee', 'Chris Nguyen', 'chris.nguyen@example.com', '5551110049'),
 ('jpatel', 'hashed_password_50', 'HR', 'Jasmine Patel', 'jasmine.patel@example.com', '5551110050');
+
+
+
+
+
+select * from director_requirements
+
+update director_requirements
+set approved = 0
+where approved=1;
+
+delete from project_deets
+
+ALTER TABLE director_requirements
+ADD approved BIT DEFAULT 0;
+
+delete from director_requirements where req_id = 19
+select * from available_emps
+
+
+delete from available_emps

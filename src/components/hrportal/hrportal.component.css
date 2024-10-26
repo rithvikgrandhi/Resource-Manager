@@ -11,6 +11,23 @@ body {
     align-items: flex-start;
     width: 100%;
   }
+  .skills-count-table {
+    width: 25%; /* Adjust width as needed */
+    border-collapse: collapse;
+    margin-left: 20px; /* Space between tables */
+  }
+  
+  .skills-count-table th, .skills-count-table td {
+    padding: 15px 20px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .skills-count-table th {
+    background-color: #007bff; /* KPMG blue */
+    color: white;
+    font-weight: bold;
+  }
   
   h1 {
     color: #333;
