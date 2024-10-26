@@ -49,6 +49,7 @@ export class HrportalComponent implements OnInit {
       console.error('Request not found');
       return;
     }
+
     const fullRequest = {
       reqId: selectedRequest.reqId,
       dirId: selectedRequest.dirId,
@@ -56,7 +57,7 @@ export class HrportalComponent implements OnInit {
       requirements: selectedRequest.requirements,
       approved: true,
       dir: selectedRequest.dir // Include other necessary fields
-  };
+    };
 
     this.http.put(`${'https://localhost:7177/api/DirectorRequirements'}/${reqId}`, fullRequest).subscribe({
       next: () => {
@@ -70,13 +71,20 @@ export class HrportalComponent implements OnInit {
           }
         }
       },
-      error: err => console.error('Approval failed', err)
+      error: err => {
+        console.error('Approval failed', err);
+        alert('An error occurred while approving the request.');
+      }
     });
   }
 
   private fetchAvailableEmployees(skill: string, countValue: number, projectId: number, directorId: number) {
     this.http.get<Employee[]>(`https://localhost:7177/api/AvailableEmps/GetBySkill/${skill}`).subscribe({
       next: (employees) => {
+        if (employees.length === 0) {
+          alert('There are no employees left to assign for this skill.');
+        }
+
         for (let i = 0; i < countValue && i < employees.length; i++) {
           const employeeId = employees[i].empId; // Get the employee ID
           console.log("Calling delete for employee ID:", employeeId);
@@ -84,7 +92,10 @@ export class HrportalComponent implements OnInit {
           this.allocateUser(projectId, directorId, employeeId);
         }
       },
-      error: err => console.error('Error fetching available employees:', err)
+      error: err => {
+        console.error('Error fetching available employees:', err);
+        alert('An error occurred while fetching available employees.');
+      }
     });
   }
 

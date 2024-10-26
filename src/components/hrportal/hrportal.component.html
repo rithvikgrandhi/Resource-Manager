@@ -1,3 +1,10 @@
+<style>
+  .approved-row {
+    background-color: green;
+    color: white; /* Optional: to ensure text is readable */
+  }
+</style>
+
 <div class="hr-dashboard">
   <h1>HR Dashboard</h1>
 
@@ -12,7 +19,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let request of requests">
+      <tr *ngFor="let request of requests" [ngClass]="{'approved-row': request.approved}">
         <td>{{ request.reqId }}</td>
         <td>{{ request.dirId }}</td>
         <td>{{ request.projectId }}</td>
@@ -21,9 +28,6 @@
           <button 
             (click)="approve(request.reqId, request.projectId, request.dirId)" 
             [disabled]="request.approved">Approve</button>
-          <button 
-            (click)="disableButtons(request.reqId)" 
-            [disabled]="request.disabled">Reject</button>
         </td>
       </tr>
     </tbody>
