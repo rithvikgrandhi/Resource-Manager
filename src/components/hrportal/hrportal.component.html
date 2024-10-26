@@ -1,27 +1,40 @@
 <div class="hr-dashboard">
-    <h1>HR Dashboard</h1>
-  
-    <table>
-      <thead>
-        <tr>
-          <th>Project</th>
-          <th>Skills Required</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let request of requests">
-          <td>{{ request.projectId }}</td>
-          <td>
-            <ul>
-              <li *ngFor="let skill of request.skills">{{ skill.name }} ({{ skill.count }})</li>
-            </ul>
-          </td>
-          <td>
-            <button (click)="publishRequest(request)">Publish</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  
+  <h1>HR Dashboard</h1>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Request ID</th>
+        <th>Director ID</th>
+        <th>Project ID</th>
+        <th>Skills Required</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let request of requests">
+        <td>{{ request.reqId }}</td>
+        <td>{{ request.dirId }}</td>
+        <td>{{ request.projectId }}</td>
+        <td>{{ request.requirements }}</td>
+
+        <!-- <td>
+          <ul>
+            <li *ngFor="let skill of getSkills(request.requirements)">
+              {{ skill.name }}: {{ skill.count }}
+            </li>
+          </ul>
+        </td> -->
+        <td>
+          <button 
+            (click)="approve(request.reqId, request.projectId, request.dirId); disableButtons(request.reqId)" 
+            [disabled]="request.disabled">Approve</button>
+          <button 
+            (click)="disableButtons(request.reqId)" 
+            [disabled]="request.disabled">Reject</button>
+        </td>
+        
+              </tr>
+    </tbody>
+  </table>
+</div>

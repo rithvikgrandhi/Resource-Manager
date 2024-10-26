@@ -1,61 +1,63 @@
-
-*{
-    font-family: bodyfont;
-    font-weight: bold;
-}
 .director-dashboard {
-    padding: 20px;
-    background-color: #f5f5f5; /* Light gray background */
-    color: #003e70; /* KPMG dark blue */
-    font-family: Arial, sans-serif; /* Use a clean font */
-  }
-  
-  h1 {
-    font-size: 24px;
-    margin-bottom: 20px;
-    color: #003e70; /* KPMG dark blue */
-  }
-  
-  form {
-    margin-bottom: 20px;
-    background-color: #ffffff; /* White background for form */
-    padding: 15px;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  }
-  
-  div {
-    margin-bottom: 15px;
-  }
-  
-  label {
-    margin-right: 10px;
-    color: #003e70; /* KPMG dark blue */
-  }
-  
-  input[type="number"],
-  select {
-    padding: 8px;
-    border: 1px solid #cccccc; /* Light gray border */
-    border-radius: 4px;
-    width: 100%; /* Full width input */
-    box-sizing: border-box; /* Include padding in width */
-  }
-  
-  input[type="checkbox"] {
-    margin-right: 8px; /* Space between checkbox and label */
-  }
-  
-  button {
-    padding: 10px 15px;
-    background-color: #003e70; /* KPMG dark blue */
-    color: #ffffff; /* White text */
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: #0056a3; /* Slightly lighter blue on hover */
-  }
-  
+  max-width: 600px;
+  margin: auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-title {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.request-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.skills-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.skill-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 5px 0;
+}
+
+.skill-input {
+  width: 60px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.submit-button {
+  padding: 10px;
+  background-color: #00338D;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.submit-button:hover {
+  background-color: #1d4994;
+}
