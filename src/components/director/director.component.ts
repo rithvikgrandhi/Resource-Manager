@@ -55,6 +55,8 @@ export class DirectorComponent {
     };
 
     // Post the data
+
+    console.log(this.res);
     this.postData(this.res).subscribe(
       response => {
         console.log('Data posted successfully:', response);

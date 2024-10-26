@@ -133,6 +133,9 @@ public partial class TalentsphereContext : DbContext
             entity.ToTable("director_requirements");
 
             entity.Property(e => e.ReqId).HasColumnName("req_id");
+            entity.Property(e => e.Approved)
+                .HasDefaultValueSql("((0))")
+                .HasColumnName("approved");
             entity.Property(e => e.DirId).HasColumnName("dir_id");
             entity.Property(e => e.ProjectId).HasColumnName("project_id");
             entity.Property(e => e.Requirements)

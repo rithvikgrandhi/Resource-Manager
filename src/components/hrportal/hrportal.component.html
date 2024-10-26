@@ -17,24 +17,15 @@
         <td>{{ request.dirId }}</td>
         <td>{{ request.projectId }}</td>
         <td>{{ request.requirements }}</td>
-
-        <!-- <td>
-          <ul>
-            <li *ngFor="let skill of getSkills(request.requirements)">
-              {{ skill.name }}: {{ skill.count }}
-            </li>
-          </ul>
-        </td> -->
         <td>
           <button 
-            (click)="approve(request.reqId, request.projectId, request.dirId); disableButtons(request.reqId)" 
-            [disabled]="request.disabled">Approve</button>
+            (click)="approve(request.reqId, request.projectId, request.dirId)" 
+            [disabled]="request.approved">Approve</button>
           <button 
             (click)="disableButtons(request.reqId)" 
             [disabled]="request.disabled">Reject</button>
         </td>
-        
-              </tr>
+      </tr>
     </tbody>
   </table>
 </div>
