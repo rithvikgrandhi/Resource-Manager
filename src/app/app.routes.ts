@@ -12,6 +12,7 @@ import { EmployeeCertificationDashboardComponent } from '../components/employee-
 import { CertificationDashboardComponent } from '../components/certification-dashboard/certification-dashboard.component';
 import { ApplicationDashboardComponent } from '../components/application-dashboard/application-dashboard.component';
 import { ApplicantDashboardComponent } from '../components/applicant-dashboard/applicant-dashboard.component';
+import { ProjectsComponent } from '../components/projects/projects.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -29,6 +30,7 @@ export const routes: Routes = [
   { path: 'certifications', component: CertificationDashboardComponent },
   { path: 'application-dashboard', component: ApplicationDashboardComponent },
   { path: 'applicant-dashboard', component: ApplicantDashboardComponent },
+  { path: 'projects', component: ProjectsComponent },
 
   { path: '**', redirectTo: '/home' } // Catch-all route for non-existing routes
 ];

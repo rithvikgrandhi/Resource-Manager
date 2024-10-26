@@ -1,0 +1,59 @@
+.project-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding: 20px;
+  }
+  
+  .project-card {
+    background-color: #ffffff; /* White card background */
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin: 15px;
+    padding: 10px;
+    width: 28%;
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+  }
+  
+  .project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  }
+  
+  .project-header {
+    border-bottom: 2px solid #0072ce; /* KPMG blue */
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+  }
+  
+  .project-header h2 {
+    font-size: 1.5rem;
+    color: #0072ce; /* KPMG blue */
+    margin: 0;
+  }
+  
+  .project-header h3 {
+    font-size: 1.2rem;
+    color: #555; /* Dark gray for director ID */
+    margin: 0;
+  }
+  
+  .project-members {
+    margin-top: 10px;
+  }
+  
+  .project-members h4 {
+    font-size: 1.1rem;
+    color: #333; /* Dark text for members section */
+    margin-bottom: 5px;
+  }
+  
+  .project-members p {
+    font-size: 1rem;
+    color: #666; /* Medium gray for member details */
+    background-color: #e6f4ff; /* Light blue background for members */
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
