@@ -12,7 +12,7 @@ import { HrportalComponent } from "../components/hrportal/hrportal.component";
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HttpClientModule, ContactusComponent, LoginComponent, DirectorComponent, RegisterComponent, AboutComponent, HomeComponent, RouterModule, DirectorComponent, HrportalComponent],
+  imports: [RouterOutlet, ContactusComponent, LoginComponent, DirectorComponent, RegisterComponent, AboutComponent, HomeComponent, RouterModule, DirectorComponent, HrportalComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

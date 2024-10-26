@@ -17,11 +17,15 @@ public partial class TalentsphereContext : DbContext
 
     public virtual DbSet<Application> Applications { get; set; }
 
+    public virtual DbSet<AvailableEmp> AvailableEmps { get; set; }
+
     public virtual DbSet<Certification> Certifications { get; set; }
 
-    public virtual DbSet<DirectorReq> DirectorReqs { get; set; }
+    public virtual DbSet<DirectorRequirement> DirectorRequirements { get; set; }
 
     public virtual DbSet<JobPost> JobPosts { get; set; }
+
+    public virtual DbSet<ProjectDeet> ProjectDeets { get; set; }
 
     public virtual DbSet<Skill> Skills { get; set; }
 
@@ -35,7 +39,7 @@ public partial class TalentsphereContext : DbContext
     {
         modelBuilder.Entity<Application>(entity =>
         {
-            entity.HasKey(e => e.ApplicationId).HasName("PK__applicat__3BCBDCF2BC4C6F3F");
+            entity.HasKey(e => e.ApplicationId).HasName("PK__applicat__3BCBDCF227DDCCDE");
 
             entity.ToTable("applications");
 
@@ -44,23 +48,51 @@ public partial class TalentsphereContext : DbContext
                 .HasDefaultValueSql("(getdate())")
                 .HasColumnType("datetime")
                 .HasColumnName("application_date");
+            entity.Property(e => e.CoverLetter)
+                .HasColumnType("text")
+                .HasColumnName("cover_letter");
             entity.Property(e => e.JobPostId).HasColumnName("job_post_id");
+            entity.Property(e => e.LastUpdated)
+                .HasDefaultValueSql("(getdate())")
+                .HasColumnType("datetime")
+                .HasColumnName("last_updated");
+            entity.Property(e => e.Skills)
+                .IsUnicode(false)
+                .HasColumnName("skills");
             entity.Property(e => e.Status)
                 .HasMaxLength(50)
                 .IsUnicode(false)
-                .HasDefaultValueSql("('applied')")
+                .HasDefaultValueSql("('Applied')")
                 .HasColumnName("status");
             entity.Property(e => e.UserId).HasColumnName("user_id");
 
             entity.HasOne(d => d.JobPost).WithMany(p => p.Applications)
                 .HasForeignKey(d => d.JobPostId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_job_post_id");
 
             entity.HasOne(d => d.User).WithMany(p => p.Applications)
                 .HasForeignKey(d => d.UserId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("fk_user_id");
+        });
+
+        modelBuilder.Entity<AvailableEmp>(entity =>
+        {
+            entity.HasKey(e => e.EmpId).HasName("PK__availabl__1299A861D93A5CC6");
+
+            entity.ToTable("available_emps");
+
+            entity.Property(e => e.EmpId)
+                .ValueGeneratedNever()
+                .HasColumnName("emp_id");
+            entity.Property(e => e.Skill)
+                .HasMaxLength(255)
+                .IsUnicode(false)
+                .HasColumnName("skill");
+
+            entity.HasOne(d => d.Emp).WithOne(p => p.AvailableEmp)
+                .HasForeignKey<AvailableEmp>(d => d.EmpId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("fk_empid");
         });
 
         modelBuilder.Entity<Certification>(entity =>
@@ -77,6 +109,15 @@ public partial class TalentsphereContext : DbContext
                 .HasMaxLength(255)
                 .IsUnicode(false)
                 .HasColumnName("certification_name");
+            entity.Property(e => e.Justification)
+                .HasMaxLength(255)
+                .IsUnicode(false)
+                .HasColumnName("justification");
+            entity.Property(e => e.Status)
+                .HasMaxLength(50)
+                .IsUnicode(false)
+                .HasDefaultValueSql("('Pending')")
+                .HasColumnName("status");
             entity.Property(e => e.UserId).HasColumnName("user_id");
 
             entity.HasOne(d => d.User).WithMany(p => p.Certifications)
@@ -85,24 +126,23 @@ public partial class TalentsphereContext : DbContext
                 .HasConstraintName("fk_employee_id_cert");
         });
 
-        modelBuilder.Entity<DirectorReq>(entity =>
+        modelBuilder.Entity<DirectorRequirement>(entity =>
         {
-            entity.HasKey(e => e.DirId).HasName("PK__director__D886CF4C42B491DB");
+            entity.HasKey(e => e.ReqId).HasName("PK__director__1513A6FB94A3E19E");
 
-            entity.ToTable("director_reqs");
+            entity.ToTable("director_requirements");
 
-            entity.Property(e => e.DirId)
-                .ValueGeneratedNever()
-                .HasColumnName("dir_id");
+            entity.Property(e => e.ReqId).HasColumnName("req_id");
+            entity.Property(e => e.DirId).HasColumnName("dir_id");
+            entity.Property(e => e.ProjectId).HasColumnName("project_id");
             entity.Property(e => e.Requirements)
                 .HasMaxLength(255)
                 .IsUnicode(false)
                 .HasColumnName("requirements");
 
-            entity.HasOne(d => d.Dir).WithOne(p => p.DirectorReq)
-                .HasForeignKey<DirectorReq>(d => d.DirId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("dir_id");
+            entity.HasOne(d => d.Dir).WithMany(p => p.DirectorRequirements)
+                .HasForeignKey(d => d.DirId)
+                .HasConstraintName("fk_dir_id1");
         });
 
         modelBuilder.Entity<JobPost>(entity =>
@@ -135,6 +175,26 @@ public partial class TalentsphereContext : DbContext
                 .HasMaxLength(255)
                 .IsUnicode(false)
                 .HasColumnName("title");
+        });
+
+        modelBuilder.Entity<ProjectDeet>(entity =>
+        {
+            entity.HasKey(e => e.ProjectId).HasName("PK__project___BC799E1F9E882A59");
+
+            entity.ToTable("project_deets");
+
+            entity.Property(e => e.ProjectId)
+                .ValueGeneratedNever()
+                .HasColumnName("project_id");
+            entity.Property(e => e.DirectorId).HasColumnName("director_id");
+            entity.Property(e => e.Members)
+                .HasMaxLength(255)
+                .IsUnicode(false)
+                .HasColumnName("members");
+
+            entity.HasOne(d => d.Director).WithMany(p => p.ProjectDeets)
+                .HasForeignKey(d => d.DirectorId)
+                .HasConstraintName("fk_dir_id");
         });
 
         modelBuilder.Entity<Skill>(entity =>

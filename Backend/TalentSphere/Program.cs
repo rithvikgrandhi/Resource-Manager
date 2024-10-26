@@ -2,7 +2,16 @@ using Microsoft.EntityFrameworkCore;
 using TalentSphere.Models;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddCors(options =>
+{
+  options.AddPolicy("AllowAnyorigin",
 
+      builder =>
+      {
+        builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+      }
+      );
+});
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -24,6 +33,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseCors("AllowAnyorigin");
 app.UseAuthorization();
 
 app.MapControllers();

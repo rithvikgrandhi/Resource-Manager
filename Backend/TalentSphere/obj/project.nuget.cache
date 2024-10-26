@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "1fB2HrHTDrNxdVNQdpNp8qsGTyuRfppFrI40IkHnNfPK9vzaq8dlZ3yn2XWEWSM5yDFm5QnLd+D0HRllOp+I7w==",
+  "dgSpecHash": "e6GbgMc1X2mTKsbt+PXpfOHpEZQ66drvl2gLIgQmn6rgglA2+k2R1OfrWuvXRymAtqwTX3DNlebha2M4TMZkhw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Administrator\\Desktop\\FullStack Training\\ResourceManagerCapstone\\Backend\\TalentSphere\\TalentSphere.csproj",
+  "projectFilePath": "C:\\Users\\Administrator\\Desktop\\project\\ResourceManagerCapstone\\Backend\\TalentSphere\\TalentSphere.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Administrator\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\Administrator\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",

@@ -1,43 +1,65 @@
+import { Component,OnInit} from '@angular/core';
 import { NgForOf, NgIf } from '@angular/common';
-import { Component } from '@angular/core';
+
+import { certificationService } from '../../services/certification.service';
+
+export interface Certifications {
+  username:string,
+  fullName: string,
+  email: string,
+  phoneNumber:string,
+  certificationId: number,
+  certificationDate: Date,
+  certificationName: string,
+  justification: string,
+  status: string
+}
 
 @Component({
   selector: 'app-certification-dashboard',
-  standalone: true,
   imports: [NgIf, NgForOf],
+  standalone: true,
   templateUrl: './certification-dashboard.component.html',
   styleUrl: './certification-dashboard.component.css'
 })
-export class CertificationDashboardComponent {
-  certificationRequests = [
-    {
-      fullName: 'John Doe',
-      email: 'john.doe@example.com',
-      certificationName: 'Project Management Professional (PMP)',
-      justification: 'To enhance project management skills.',
-      status: 'Pending'
-    },
-    {
-      fullName: 'Jane Smith',
-      email: 'jane.smith@example.com',
-      certificationName: 'Certified ScrumMaster (CSM)',
-      justification: 'To improve agile project management capabilities.',
-      status: 'Approved'
-    },
-    {
-      fullName: 'Alice Johnson',
-      email: 'alice.johnson@example.com',
-      certificationName: 'AWS Certified Solutions Architect',
-      justification: 'To gain expertise in cloud architecture.',
-      status: 'Pending'
-    }
-  ];
-  approveRequest(request: any) {
-    request.status = 'Approved';
+
+export class CertificationDashboardComponent implements OnInit {
+  certificationRequests: Certifications[] = [];
+restUserData : certificationService
+  constructor(private _certifications: certificationService) {
+
+    this.restUserData=_certifications;
+
   }
 
-  rejectRequest(request: any) {
-    request.status = 'Rejected';
+  ngOnInit(): void {
+    this.loadCertificationRequests();
+  }
+
+  loadCertificationRequests(): void {
+    this._certifications.getCertificationDetails().subscribe((data) => {
+      this.certificationRequests = data;
+      console.log(this.certificationRequests);
+    });
+  }
+
+  approveRequest(request: Certifications): void {
+    request.status = 'Approved'; // Optimistic UI Update
+    this._certifications.updateCertificationStatus(request.certificationId, 'Approved').subscribe(
+      () => console.log('Request approved successfully.'),
+      (error) => console.error('Error approving request:', error)
+    );
+  }
+
+  rejectRequest(request: Certifications): void {
+    request.status = 'Rejected'; // Optimistic UI Update
+    this._certifications.updateCertificationStatus(request.certificationId, 'Rejected').subscribe(
+      () => console.log('Request rejected successfully.'),
+      (error) => console.error('Error rejecting request:', error)
+    );
+  }
+  
+  getStatusClass(status: string): string {
+    return status === 'Approved' ? 'status-approved' : status === 'Rejected' ? 'status-rejected' : '';
   }
 }
-

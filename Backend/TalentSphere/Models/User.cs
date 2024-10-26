@@ -21,9 +21,13 @@ public partial class User
 
     public virtual ICollection<Application> Applications { get; set; } = new List<Application>();
 
+    public virtual AvailableEmp? AvailableEmp { get; set; }
+
     public virtual ICollection<Certification> Certifications { get; set; } = new List<Certification>();
 
-    public virtual DirectorReq? DirectorReq { get; set; }
+    public virtual ICollection<DirectorRequirement> DirectorRequirements { get; set; } = new List<DirectorRequirement>();
+
+    public virtual ICollection<ProjectDeet> ProjectDeets { get; set; } = new List<ProjectDeet>();
 
     public virtual ICollection<Skill> Skills { get; set; } = new List<Skill>();
 }

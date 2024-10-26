@@ -24,9 +24,9 @@ export const routes: Routes = [
   { path: 'hrportal', component: HrportalComponent },
 
   { path: 'application', component: ApplicationComponent },
-  { path: 'request-certification', component: CertificationRequestComponent },
-  { path: 'mycertifications',component: EmployeeCertificationDashboardComponent,},
-  { path: 'certifications', component: CertificationDashboardComponent },
+  { path: 'request-certification', component: CertificationRequestComponent }, //request form
+  { path: 'mycertifications',component: EmployeeCertificationDashboardComponent,}, //employee dashboard component
+  { path: 'certifications', component: CertificationDashboardComponent }, //certification Hr dashboard component
   { path: 'application-dashboard', component: ApplicationDashboardComponent },
   { path: 'applicant-dashboard', component: ApplicantDashboardComponent },
 

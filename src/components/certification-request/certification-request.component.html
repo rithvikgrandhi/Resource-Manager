@@ -1,49 +1,38 @@
 <form class="certification-form" (ngSubmit)="onSubmit()" #certificationForm="ngForm" novalidate>
     <div class="certification-card">
-        <h2>Certification Request</h2>
-
-        <div *ngIf="requestMessage" class="request-message alert">
-            {{ requestMessage }}
-        </div>
-
-        <div *ngIf="formSubmitted && certificationForm.invalid" class="error-message">
-            Please fill in all required fields.
-        </div>
-
-        <div class="form-field">
-            <label for="fullName">Full Name</label>
-            <input type="text" id="fullName" required [(ngModel)]="model.fullName" name="fullName" />
-            <div class="error-message" *ngIf="certificationForm.controls['fullName']?.invalid && (certificationForm.controls['fullName']?.touched || certificationForm.controls['fullName']?.dirty)">
-                Full name is required.
-            </div>
-        </div>
-
-        <div class="form-field">
-            <label for="email">Email</label>
-            <input type="email" id="email" required [(ngModel)]="model.email" name="email" />
-            <div class="error-message" *ngIf="certificationForm.controls['email']?.invalid && (certificationForm.controls['email']?.touched || certificationForm.controls['email']?.dirty)">
-                A valid email is required.
-            </div>
-        </div>
-
-        <div class="form-field">
-            <label for="certificationName">Certification Name</label>
-            <input type="text" id="certificationName" required [(ngModel)]="model.certificationName" name="certificationName" />
-            <div class="error-message" *ngIf="certificationForm.controls['certificationName']?.invalid && (certificationForm.controls['certificationName']?.touched || certificationForm.controls['certificationName']?.dirty)">
-                Certification name is required.
-            </div>
-        </div>
-
-        <div class="form-field">
-            <label for="justification">Justification</label>
-            <textarea id="justification" required [(ngModel)]="model.justification" name="justification"></textarea>
-            <div class="error-message" *ngIf="certificationForm.controls['justification']?.invalid && (certificationForm.controls['justification']?.touched || certificationForm.controls['justification']?.dirty)">
-                Justification is required.
-            </div>
-        </div>
-
-        <div class="form-actions">
-            <button class="submit-button" type="submit" (click)="formSubmitted = true" [disabled]="certificationForm.invalid">Request Certification</button>
-        </div>
+      <h2>Certification Request</h2>
+  
+      <div *ngIf="requestMessage" class="request-message alert">
+        {{ requestMessage }}
+      </div>
+  
+      <div *ngIf="formSubmitted && certificationForm.invalid" class="error-message">
+        Please fill in all required fields.
+      </div>
+  
+      <div class="form-field">
+        <label for="fullName">Full Name</label>
+        <input type="text" id="fullName" [(ngModel)]="model.fullName" name="fullName" required />
+      </div>
+  
+      <!-- <div class="form-field">
+        <label for="email">Email</label>
+        <input type="email" id="email" [(ngModel)]="model.email" name="email" required />
+      </div> -->
+  
+      <div class="form-field">
+        <label for="certificationName">Certification Name</label>
+        <input type="text" id="certificationName" [(ngModel)]="model.certificationName" name="certificationName" required />
+      </div>
+  
+      <div class="form-field">
+        <label for="justification">Justification</label>
+        <textarea id="justification" [(ngModel)]="model.justification" name="justification" required></textarea>
+      </div>
+  
+      <div class="form-actions">
+        <button class="submit-button" type="submit" [disabled]="certificationForm.invalid">Request Certification</button>
     </div>
-</form>
+    </div>
+  </form>
+  

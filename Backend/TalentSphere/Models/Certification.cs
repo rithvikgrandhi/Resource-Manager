@@ -13,5 +13,10 @@ public partial class Certification
 
     public DateTime CertificationDate { get; set; }
 
+    public string? Justification { get; set; }
+
+    public string? Status { get; set; }
+
     public virtual User User { get; set; } = null!;
+
 }
