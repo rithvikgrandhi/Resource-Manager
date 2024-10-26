@@ -6,19 +6,15 @@
         {{ requestMessage }}
       </div>
   
-      <div *ngIf="formSubmitted && certificationForm.invalid" class="error-message">
+      <!-- <div *ngIf="formSubmitted && certificationForm.invalid" class="error-message">
         Please fill in all required fields.
-      </div>
+      </div> -->
   
       <div class="form-field">
-        <label for="fullName">Full Name</label>
-        <input type="text" id="fullName" [(ngModel)]="model.fullName" name="fullName" required />
+        <label for="certificationDate">Date</label>
+        <input type="text" id="certificationDate" [(ngModel)]="model.certificationDate" name="certificationdate" required />
       </div>
   
-      <!-- <div class="form-field">
-        <label for="email">Email</label>
-        <input type="email" id="email" [(ngModel)]="model.email" name="email" required />
-      </div> -->
   
       <div class="form-field">
         <label for="certificationName">Certification Name</label>

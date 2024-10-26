@@ -8,6 +8,7 @@ import { MatInputModule } from '@angular/material/input';
 import { NgIf } from '@angular/common';
 import { certificationService } from '../../services/certification.service';
 import { Certifications } from '../certification-dashboard/certification-dashboard.component';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-certification-request',
@@ -18,8 +19,8 @@ import { Certifications } from '../certification-dashboard/certification-dashboa
 })
 export class CertificationRequestComponent {
   model: any = {
-    fullName: '',
-    email: '',
+    userId: localStorage.getItem('user_id'),
+    certificationDate: '',
     certificationName: '',
     justification: ''
   };
@@ -33,30 +34,53 @@ export class CertificationRequestComponent {
   justification: string='';
 
   restData:certificationService;
+  http:HttpClient;
 
-  constructor(restDataref:certificationService,private router: Router) {
+  constructor(restDataref:certificationService,private router: Router, _http: HttpClient) {
     this.restData = restDataref;
+    this.http = _http;
   }
 
   onSubmit() {
     this.formSubmitted = true; // Track submission state
   
-    if (this.isFormValid()) {
+    // if (this.isFormValid()) {
       // Call the backend service to post the data
-      this.certificationService.postCertification(this.model).subscribe({
-        next: (response:Certifications) => {
-          this.requestMessage = 'Certification request submitted successfully!';
-          this.router.navigate(['/certifications-dashboard']); // Navigate to dashboard or success page
-        },
-        error: (error:any) => {
-          this.requestMessage = 'Failed to submit request. Please try again.';
-          console.error('Error:', error);
-        },
+      this.model['userId'] = parseInt(localStorage.getItem('user_id')??'0');
+      console.log("check1",this.model)
+      this.http.post("https://localhost:7188/api/Certifications", this.model).subscribe(data =>{
+        console.log(data);
       });
-    } else {
-      this.requestMessage = 'Please fill in all required fields.';
     }
-  }
+  //   {
+  //     "certificationId": 1,
+  //     "userId": 1,
+  //     "certificationName": "AWS Certified Solutions Architect",
+  //     "certificationDate": "2023-05-10T00:00:00",
+  //     "justification": "Required for cloud migration project",
+  //     "status": "Approved",
+  //     "user": null
+  //   },
+  //   {
+  //     "certificationName": "jhbjh",
+  //     "justification": "hjb",
+  //     "userId": 1
+  // }
+    //   this.certificationService.postCertification(this.model).subscribe({
+    //     next: (response:Certifications) => {
+    //       console.log("submitted")
+    //       this.requestMessage = 'Certification request submitted successfully!';
+    //       this.router.navigate(['/certifications-dashboard']); // Navigate to dashboard or success page
+    //     },
+    //     error: (error:any) => {
+    //       this.requestMessage = 'Failed to submit request. Please try again.';
+    //       console.error('Error:', error);
+    //     },
+    //   });
+    // } else {
+    //   this.requestMessage = 'Please fill in all required fields.';
+    // }
+  //}
 
   isFormValid() {
     return Object.values(this.model).every(x => x !== '');
