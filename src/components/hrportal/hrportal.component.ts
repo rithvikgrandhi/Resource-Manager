@@ -163,14 +163,12 @@ export class HrportalComponent implements OnInit {
       error: err => console.error('Error fetching data:', err)
     });
   }
-
-
   private countSkills() {
     this.countedSkills = {}; // Reset counted skills
 
     this.http.get<Employee[]>("https://localhost:7177/api/AvailableEmps").subscribe({
         next: (data) => {
-            console.log("check2",data);
+            console.log("scam",data);
             // Count skills from the fetched employee data
             data.forEach(employee => {
                 const skill = employee.skill; // Get the employee's skill

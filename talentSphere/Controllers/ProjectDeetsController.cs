@@ -15,19 +15,20 @@ namespace talentSphere.Controllers
     {
         private readonly TalentsphereContext _context = new();
 
-        //public ProjectDeetsController(TalentsphereContext context)
-        //{
-        //    _context = context;
-        //}
+        // Uncomment the constructor if you want to use dependency injection
+        // public ProjectDeetsController(TalentsphereContext context)
+        // {
+        //     _context = context;
+        // }
 
         // GET: api/ProjectDeets
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ProjectDeet>>> GetProjectDeets()
         {
-          if (_context.ProjectDeets == null)
-          {
-              return NotFound();
-          }
+            if (_context.ProjectDeets == null)
+            {
+                return NotFound();
+            }
             return await _context.ProjectDeets.ToListAsync();
         }
 
@@ -35,10 +36,10 @@ namespace talentSphere.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<ProjectDeet>> GetProjectDeet(int id)
         {
-          if (_context.ProjectDeets == null)
-          {
-              return NotFound();
-          }
+            if (_context.ProjectDeets == null)
+            {
+                return NotFound();
+            }
             var projectDeet = await _context.ProjectDeets.FindAsync(id);
 
             if (projectDeet == null)
@@ -49,8 +50,25 @@ namespace talentSphere.Controllers
             return projectDeet;
         }
 
+        // GET: api/ProjectDeets/joined
+        [HttpGet("joined")]
+        public async Task<ActionResult<IEnumerable<RequirementDto>>> GetJoinedRequirements()
+        {
+            var requirements = await _context.DirectorRequirements
+                .Join(_context.Users,
+                      dr => dr.DirId, // Foreign key from DirRequirements
+                      u => u.UserId,      // Primary key from Users
+                      (dr, u) => new RequirementDto
+                      {
+                          UserName = u.FullName,
+                          Requirements = dr.Requirements
+                      })
+                .ToListAsync();
+
+            return Ok(requirements);
+        }
+
         // PUT: api/ProjectDeets/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         public async Task<IActionResult> PutProjectDeet(int id, ProjectDeet projectDeet)
         {
@@ -81,14 +99,13 @@ namespace talentSphere.Controllers
         }
 
         // POST: api/ProjectDeets
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         public async Task<ActionResult<ProjectDeet>> PostProjectDeet(ProjectDeet projectDeet)
         {
-          if (_context.ProjectDeets == null)
-          {
-              return Problem("Entity set 'TalentsphereContext.ProjectDeets'  is null.");
-          }
+            if (_context.ProjectDeets == null)
+            {
+                return Problem("Entity set 'TalentsphereContext.ProjectDeets' is null.");
+            }
             _context.ProjectDeets.Add(projectDeet);
             try
             {
@@ -133,5 +150,12 @@ namespace talentSphere.Controllers
         {
             return (_context.ProjectDeets?.Any(e => e.ProjectId == id)).GetValueOrDefault();
         }
+    }
+
+    // Requirement DTO for response
+    public class RequirementDto
+    {
+        public string UserName { get; set; }
+        public string Requirements { get; set; }
     }
 }
