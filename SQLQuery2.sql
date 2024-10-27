@@ -161,9 +161,15 @@ INSERT INTO available_emps (emp_id, skill) VALUES (29, 'Cloud');
 INSERT INTO available_emps (emp_id, skill) VALUES (30, 'Frontend');
 
 
+INSERT INTO available_emps (emp_id, skill) VALUES (31, 'Fullstack');
+INSERT INTO available_emps (emp_id, skill) VALUES (32, 'Fullstack');
+INSERT INTO available_emps (emp_id, skill) VALUES (33, 'Fullstack');
+
+
+
 select count(*) from available_emps where skill='Database';
 
-select * from certifications
+select * from available_emps
 
 select * from 
 select * from director_requirements

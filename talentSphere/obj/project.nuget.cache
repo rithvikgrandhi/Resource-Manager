@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "t1TntC4aVfQCSW902JjTD+ScW5TTS5Iz0oG+UU/8dc+nheR78/oVo6vOdai2QX7w335wPSMfkLuXChcsy6fNaA==",
+  "dgSpecHash": "LKK7yv23WfPber02nzm++f9GViLJYdqLkylQSvfTzf8myHFZDTY9DcdLQaFIiaYGArLX1z6M2drbRCov2lCM5Q==",
   "success": true,
   "projectFilePath": "C:\\Users\\Administrator\\Desktop\\ResourceManagerCapstone\\talentSphere\\talentSphere.csproj",
   "expectedPackageFiles": [
@@ -233,7 +233,11 @@
     "C:\\Users\\Administrator\\.nuget\\packages\\system.threading.timer\\4.3.0\\system.threading.timer.4.3.0.nupkg.sha512",
     "C:\\Users\\Administrator\\.nuget\\packages\\system.windows.extensions\\6.0.0\\system.windows.extensions.6.0.0.nupkg.sha512",
     "C:\\Users\\Administrator\\.nuget\\packages\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
-    "C:\\Users\\Administrator\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512"
+    "C:\\Users\\Administrator\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512",
+    "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.netcore.app.ref\\7.0.18\\microsoft.netcore.app.ref.7.0.18.nupkg.sha512",
+    "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\7.0.18\\microsoft.windowsdesktop.app.ref.7.0.18.nupkg.sha512",
+    "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\7.0.18\\microsoft.aspnetcore.app.ref.7.0.18.nupkg.sha512",
+    "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\7.0.18\\microsoft.netcore.app.host.win-x64.7.0.18.nupkg.sha512"
   ],
   "logs": []
 }
