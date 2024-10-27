@@ -6,44 +6,49 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { Router } from '@angular/router';
+import { ApiCallService } from '../services/api-call.service';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, MatCardModule, MatFormFieldModule, MatInputModule, MatButtonModule, NgIf, CommonModule],
+  imports: [
+    FormsModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    NgIf,
+    CommonModule,
+  ],
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'] // Use "styleUrls" instead of "styleUrl"
+  styleUrls: ['./login.component.css'], // Use "styleUrls" instead of "styleUrl"
 })
 export class LoginComponent {
   model = {
-    username: '',
-    password: ''
+    userName: '',
+    password: '',
   };
 
   loginMessage: string | null = null;
   isSuccess: boolean | null = null; // Initialize as neutral
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private apiCallService:ApiCallService) {}
 
   onSubmit() {
-    const registeredUser = {
-      username: 'user',
-      password: 'password'
-    };
-  
-    if (this.model.username === registeredUser.username && this.model.password === registeredUser.password) {
-      this.loginMessage = 'Login successful!';
-      this.isSuccess = true; // Set to true for successful login
-      this.router.navigate(['/home']);
-    } else {
-      this.loginMessage = 'Login failed. Try again.';
-      this.isSuccess = false; // Set to false for unsuccessful login
+    
+      console.log(this.model);
+      this.apiCallService.checkCredentials(this.model).subscribe(
+        (response) => {
+          console.log(response)
+          localStorage.setItem('userId', response.userId); // Store token in local storage
+          localStorage.setItem('userRole', response.role)
+          this.apiCallService.login()
+          this.router.navigate(['/home']); // Navigate to a protected route
+        },
+        (error) => {
+          alert('Invalid credentials');
+        }
+      );
+    
     }
-  
-    // Optionally clear the message after a few seconds
-    setTimeout(() => {
-      this.loginMessage = null; 
-      this.isSuccess = null; // Reset the state
-    }, 3000);
-  }
 }

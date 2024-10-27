@@ -1,21 +1,23 @@
 <div class="dashboard-card">
     <h2>Certification Requests</h2>
-
+  
     <div *ngIf="certificationRequests.length === 0" class="no-requests-message">
-        No certification requests available.
+      No certification requests available.
     </div>
-
-    <div class="request-cards" *ngIf="certificationRequests.length > 0">
-        <div class="request-card" *ngFor="let request of certificationRequests">
-            <h3>{{ request.fullName }}</h3>
-            <p><strong>Email:</strong> {{ request.email }}</p>
-            <p><strong>Certification Name:</strong> {{ request.certificationName }}</p>
-            <p><strong>Justification:</strong> {{ request.justification }}</p>
-            <p><strong>Status:</strong> {{ request.status }}</p>
-            <div class="button-group">
-                <button class="approve-button" (click)="approveRequest(request)">Approve</button>
-                <button class="reject-button" (click)="rejectRequest(request)">Reject</button>
-            </div>
+  
+    <div class="request-cards">
+      <div class="request-card" *ngFor="let request of certificationRequests">
+        <h3>{{ request.fullName }}</h3>
+        <p><strong>Email:</strong> {{ request.email }}</p>
+        <p><strong>Certification Name:</strong> {{ request.certificationName }}</p>
+        <p><strong>Justification:</strong> {{ request.justification }}</p>
+        <p><strong>Status:</strong> <span [class]="getStatusClass(request.status)">{{ request.status }}</span></p>
+  
+        <div class="button-group" *ngIf="!request.status">
+          <button class="approve-button" (click)="approveRequest(request)">Approve</button>
+          <button class="reject-button" (click)="rejectRequest(request)">Reject</button>
         </div>
+      </div>
     </div>
-</div>
+  </div>
+  

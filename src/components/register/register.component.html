@@ -11,18 +11,10 @@
         </div>
 
         <div class="form-field">
-            <label for="firstName">First Name</label>
-            <input type="text" id="firstName" required [(ngModel)]="model.firstName" name="firstName" />
-            <div class="error-message" *ngIf="registerForm.controls['firstName']?.invalid && (registerForm.controls['firstName']?.touched || registerForm.controls['firstName']?.dirty)">
-                First name is required.
-            </div>
-        </div>
-
-        <div class="form-field">
-            <label for="lastName">Last Name</label>
-            <input type="text" id="lastName" required [(ngModel)]="model.lastName" name="lastName" />
-            <div class="error-message" *ngIf="registerForm.controls['lastName']?.invalid && (registerForm.controls['lastName']?.touched || registerForm.controls['lastName']?.dirty)">
-                Last name is required.
+            <label for="fullName">Full Name</label>
+            <input type="text" id="fullName" required [(ngModel)]="model.fullName" name="fullName" />
+            <div class="error-message" *ngIf="registerForm.controls['fullName']?.invalid && (registerForm.controls['fullName']?.touched || registerForm.controls['fullName']?.dirty)">
+                Full name is required.
             </div>
         </div>
 
@@ -35,9 +27,9 @@
         </div>
 
         <div class="form-field">
-            <label for="phone">Phone Number</label>
-            <input type="text" id="phone" required [(ngModel)]="model.phone" name="phone" />
-            <div class="error-message" *ngIf="registerForm.controls['phone']?.invalid && (registerForm.controls['phone']?.touched || registerForm.controls['phone']?.dirty)">
+            <label for="phoneNumber">Phone Number</label>
+            <input type="text" id="phoneNumber" required [(ngModel)]="model.phoneNumber" name="phoneNumber" />
+            <div class="error-message" *ngIf="registerForm.controls['phoneNumber']?.invalid && (registerForm.controls['phoneNumber']?.touched || registerForm.controls['phoneNumber']?.dirty)">
                 Phone number is required.
             </div>
         </div>
@@ -56,7 +48,7 @@
                 <option value="" disabled selected>Select your role</option>
                 <option value="HR">HR</option>
                 <option value="Applicant">Applicant</option>
-                <option value="Owner">Owner</option>
+                <option value="Director">Director</option>
                 <option value="Employee">Employee</option>
             </select>
             <div class="error-message" *ngIf="registerForm.controls['role']?.invalid && (registerForm.controls['role']?.touched || registerForm.controls['role']?.dirty)">
@@ -65,10 +57,10 @@
         </div>
 
         <div class="form-field">
-            <label for="password">Create Password</label>
-            <input type="password" id="password" required [(ngModel)]="model.password" name="password" 
+            <label for="passwordHash">Create Password</label>
+            <input type="password" id="passwordHash" required [(ngModel)]="model.passwordHash" name="passwordHash" 
                    (focus)="showPasswordRules = true" (blur)="showPasswordRules = false" (input)="checkPassword()" />
-            <div class="error-message" *ngIf="registerForm.controls['password']?.invalid && (registerForm.controls['password']?.touched || registerForm.controls['password']?.dirty)">
+            <div class="error-message" *ngIf="registerForm.controls['passwordHash']?.invalid && (registerForm.controls['passwordHash']?.touched || registerForm.controls['passwordHash']?.dirty)">
                 Password is required.
             </div>
             <div *ngIf="showPasswordRules" class="password-rules-box">
@@ -112,17 +104,17 @@
 
         <div class="form-field">
             <label for="confirmPassword">Confirm Password</label>
-            <input type="password" id="confirmPassword" required [(ngModel)]="model.confirmPassword" name="confirmPassword" (input)="checkPassword()" />
+            <input type="password" id="confirmPassword" required [(ngModel)] = "model.confirmPassword" name="confirmPassword" (input)="checkPassword()" />
             <div class="error-message" *ngIf="registerForm.controls['confirmPassword']?.invalid && (registerForm.controls['confirmPassword']?.touched || registerForm.controls['confirmPassword']?.dirty)">
                 Confirm password is required.
             </div>
-            <div class="error-message" *ngIf="model.password !== model.confirmPassword">
+            <div class="error-message" *ngIf="model.passwordHash !== model.confirmPassword">
                 Passwords must match.
             </div>
         </div>
 
         <div class="form-actions">
-            <button class="submit-button" type="submit" (click)="formSubmitted = true" [disabled]="registerForm.invalid || model.password !== model.confirmPassword">Register</button>
+            <button class="submit-button" type="submit" (click)="formSubmitted = true" [disabled]="registerForm.invalid || model.passwordHash !== model.confirmPassword">Register</button>
         </div>
     </div>
 </form>

@@ -40,7 +40,14 @@
         </select>
     </div>
 
+    <!-- Date Field with default value as current date -->
+    <div class="form-field" hidden>
+        <label for="postedDate">Posted Date</label>
+        <input type="date" id="postedDate" [(ngModel)]="jobPost.postedDate" name="postedDate" />
+    </div>
+
     <div class="form-actions">
         <button class="submit-button" type="submit" [disabled]="jobPostForm.invalid">Create Job Post</button>
     </div>
+    
 </form>

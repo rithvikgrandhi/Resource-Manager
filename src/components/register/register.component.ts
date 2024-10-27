@@ -6,6 +6,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { Router } from '@angular/router';
+import { ApiCallService } from '../services/api-call.service';
 
 @Component({
   selector: 'app-register',
@@ -15,15 +16,15 @@ import { Router } from '@angular/router';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent {
+
   model: any = {
-    firstName: '',
-    lastName: '',
     username: '',
-    phone: '',
+    passwordHash: '',
+    role: '',
+    fullName: '',
     email: '',
-    password: '',
-    confirmPassword: '',
-    role: ''
+    phoneNumber: '',
+    confirmPassword: ''
   };
   formSubmitted: boolean = false;
   showPasswordRules: boolean = false;
@@ -34,29 +35,37 @@ export class RegisterComponent {
   passwordHasLowercase: boolean = false;
   registrationMessage: string = '';
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private apiCallService:ApiCallService) {}
 
   checkPassword() {
-    this.passwordLengthValid = this.model.password.length >= 8;
-    this.passwordHasNumber = /\d/.test(this.model.password);
-    this.passwordHasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(this.model.password);
-    this.passwordHasUppercase = /[A-Z]/.test(this.model.password);
-    this.passwordHasLowercase = /[a-z]/.test(this.model.password);
+    this.passwordLengthValid = this.model.passwordHash.length >= 8;
+    this.passwordHasNumber = /\d/.test(this.model.passwordHash);
+    this.passwordHasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(this.model.passwordHash);
+    this.passwordHasUppercase = /[A-Z]/.test(this.model.passwordHash);
+    this.passwordHasLowercase = /[a-z]/.test(this.model.passwordHash);
   }
 
   onSubmit() {
     this.formSubmitted = true; // Track submission state
+    console.log(this.model);
 
     // Check if form is valid
     if (this.isFormValid()) {
       // Check if passwords match
-      if (this.model.password === this.model.confirmPassword) {
-        // Handle successful registration logic
+      if (this.model.passwordHash === this.model.confirmPassword) {
+        
         this.registrationMessage = 'Registration successful!';
-        console.log(this.model)
-        this.router.navigate(['/login']);
+        
+        // Destructure to remove confirmPassword and log the result
+        const { confirmPassword, ...modelWithoutConfirmPassword } = this.model;
+        
+        console.log(modelWithoutConfirmPassword);
+        
+        this.apiCallService.registerUser(this.model)
+        // Optionally navigate to the login page
+        // this.router.navigate(['/login']);
       } else {
-        this.registrationMessage = 'Passwords must match.';
+        this.registrationMessage = 'Passwords do not match.';
       }
     } else {
       this.registrationMessage = 'Please fill in all required fields.';

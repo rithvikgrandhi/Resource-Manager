@@ -1,0 +1,17 @@
+<div class="job-post-list">
+  <h2>Job Postings</h2>
+  <div *ngFor="let job of JobPosts" class="job-post-card">
+    <h3>{{ job.title }}</h3>
+    <p><strong>Description:</strong> {{ job.description }}</p>
+    <p><strong>Skills Required:</strong> {{ job.skillsRequired }}</p>
+    <p>
+      <strong>Number of People Required:</strong>
+      {{ job.numberOfPeopleRequired }}
+    </p>
+    <p><strong>Posted Date:</strong> {{ job.postedDate | date }}</p>
+    <p><strong>Status:</strong> {{ job.status }}</p>
+
+    <button (click)="viewJobDetails(job.jobPostId)">View Details</button>
+    <button (click)="viewApplicants(job.jobPostId)">View Details</button>
+  </div>
+</div>

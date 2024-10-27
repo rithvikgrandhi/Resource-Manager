@@ -1,0 +1,13 @@
+<div class="project-container">
+    <div class="project-card" *ngFor="let project of deets">
+      <div class="project-header">
+        <h2>Project ID: {{ project.projectId }}</h2>
+        <h3>Director ID: {{ project.directorId }}</h3>
+      </div>
+      <div class="project-members">
+        <h4>Members:</h4>
+        <p>{{ project.members }}</p>
+      </div>
+    </div>
+  </div>
+  

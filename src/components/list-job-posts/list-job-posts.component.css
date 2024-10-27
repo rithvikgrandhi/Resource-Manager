@@ -1,0 +1,41 @@
+.job-post-list {
+  max-width: 800px;
+  margin: 50px auto; /* Center the list */
+}
+
+h2 {
+  text-align: center; /* Centered title */
+  font-family: "HeadingFont"; /* Custom font for heading */
+}
+
+.job-post-card {
+  background-color: #fff; /* White background for card */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  padding: 20px; /* Padding for card content */
+  margin-bottom: 20px; /* Space between cards */
+}
+
+.job-post-card h3 {
+  margin-top: 0; /* Remove margin from the top of the title */
+}
+
+.job-post-card button {
+  margin-top: 15px; /* Space above the button */
+  padding: 10px 15px; /* Padding for button */
+  background-color: #007bff; /* Primary color */
+  color: white; /* Text color for the button */
+  border: none; /* Remove default border */
+  border-radius: 5px; /* Rounded corners for the button */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s; /* Smooth background color transition */
+}
+
+.job-post-card button:hover {
+  background-color: #0056b3; /* Darker shade on hover */
+}
+
+.job-post-card button:focus {
+  outline: none; /* Remove focus outline */
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5); /* Add shadow for accessibility */
+}

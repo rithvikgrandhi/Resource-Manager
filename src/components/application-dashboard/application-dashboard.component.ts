@@ -1,38 +1,61 @@
-import { NgFor, NgIf } from '@angular/common';
-import { Component } from '@angular/core';
+import { DatePipe, NgFor, NgIf } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { ApiCallService } from '../services/api-call.service';
+import { ActivatedRoute } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+
+export interface ApplicationHR {
+  applicationId: number;
+  userId: number;
+  jobPostId: number;
+  status: string;
+  applicationDate: Date;
+  lastUpdated: Date;
+  skills: string;
+  coverLetter: string;
+  fullName: string;
+  email: string;
+}
 
 @Component({
   selector: 'app-application-dashboard',
   standalone: true,
-  imports: [NgFor, NgIf],
+  imports: [NgFor, NgIf, FormsModule, DatePipe],
   templateUrl: './application-dashboard.component.html',
   styleUrl: './application-dashboard.component.css',
 })
-export class ApplicationDashboardComponent {
-  applicants = [
-    {
-      fullName: 'John Doe',
-      email: 'john.doe@example.com',
-      phone: '123-456-7890',
-      status: 'Under Review',
-    },
-    {
-      fullName: 'Jane Smith',
-      email: 'jane.smith@example.com',
-      phone: '234-567-8901',
-      status: 'Interview Scheduled',
-    },
-    {
-      fullName: 'Michael Johnson',
-      email: 'michael.johnson@example.com',
-      phone: '345-678-9012',
-      status: 'Rejected',
-    },
-    {
-      fullName: 'Emily Davis',
-      email: 'emily.davis@example.com',
-      phone: '456-789-0123',
-      status: 'Hired',
-    },
+export class ApplicationDashboardComponent implements OnInit {
+  jobPostId!: number;
+  constructor(
+    private apiCallService: ApiCallService,
+    private route: ActivatedRoute
+  ) {}
+  applications!: ApplicationHR[];
+
+  statusOptions: string[] = [
+    'Applied',
+    'Under Review',
+    'HR Screening',
+    'Recruitment Test',
+    'Technical Interview',
+    'HR Interview',
+    'Accepted',
+    'Rejected',
   ];
+
+  ngOnInit() {
+    this.jobPostId = +this.route.snapshot.paramMap.get('id')!;
+    this.apiCallService.getApplicationsByJobId(this.jobPostId).subscribe(
+      (data) => {
+        this.applications = data;
+        console.log(this.applications);
+      },
+      (error) => console.log(error)
+    );
+  }
+  updateStatus(application: ApplicationHR, newStatus: string) {
+    console.log(application);
+    application.status = newStatus;
+    this.apiCallService.updateApplicationStatus(application);
+  }
 }

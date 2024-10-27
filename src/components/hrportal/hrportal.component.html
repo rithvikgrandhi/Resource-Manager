@@ -1,27 +1,45 @@
 <div class="hr-dashboard">
-    <h1>HR Dashboard</h1>
-  
+  <h1>HR Dashboard</h1>
+
+  <div class="table-container">
     <table>
       <thead>
         <tr>
-          <th>Project</th>
+          <th>Request ID</th>
+          <th>Director ID</th>
+          <th>Project ID</th>
           <th>Skills Required</th>
           <th>Actions</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let request of requests">
+        <tr *ngFor="let request of requests" [ngClass]="{'approved-row': request.approved}">
+          <td>{{ request.reqId }}</td>
+          <td>{{ request.dirId }}</td>
           <td>{{ request.projectId }}</td>
+          <td>{{ request.requirements }}</td>
           <td>
-            <ul>
-              <li *ngFor="let skill of request.skills">{{ skill.name }} ({{ skill.count }})</li>
-            </ul>
-          </td>
-          <td>
-            <button (click)="publishRequest(request)">Publish</button>
+            <button 
+              (click)="approve(request.reqId, request.projectId, request.dirId)" 
+              [disabled]="request.approved">{{request.approved? 'Approved': 'Approve'}}</button>
           </td>
         </tr>
       </tbody>
     </table>
+
+    <table class="skills-count-table">
+      <thead>
+        <tr>
+          <th>Skill</th>
+          <th>Count</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let skill of countedSkills | keyvalue">
+          <td>{{ skill.key }}</td>
+          <td>{{ skill.value }}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
-  
+</div>
