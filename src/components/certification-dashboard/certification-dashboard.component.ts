@@ -12,7 +12,7 @@ export interface Certifications {
   certificationDate: Date,
   certificationName: string,
   justification: string,
-  status: string
+  status: boolean
 }
 
 @Component({
@@ -44,22 +44,22 @@ restUserData : certificationService
   }
 
   approveRequest(request: Certifications): void {
-    request.status = 'Approved'; // Optimistic UI Update
-    this._certifications.updateCertificationStatus(request.certificationId, 'Approved').subscribe(
+    request.status = true // Optimistic UI Update
+    this._certifications.updateCertificationStatus(request.certificationId, true).subscribe(
       () => console.log('Request approved successfully.'),
       (error) => console.error('Error approving request:', error)
     );
   }
 
   rejectRequest(request: Certifications): void {
-    request.status = 'Rejected'; // Optimistic UI Update
-    this._certifications.updateCertificationStatus(request.certificationId, 'Rejected').subscribe(
+    request.status = false; // Optimistic UI Update
+    this._certifications.updateCertificationStatus(request.certificationId, false).subscribe(
       () => console.log('Request rejected successfully.'),
       (error) => console.error('Error rejecting request:', error)
     );
   }
   
-  getStatusClass(status: string): string {
-    return status === 'Approved' ? 'status-approved' : status === 'Rejected' ? 'status-rejected' : '';
+  getStatusClass(status: boolean): string {
+    return status ? 'status-approved' : status == false ? 'status-rejected' : '';
   }
 }

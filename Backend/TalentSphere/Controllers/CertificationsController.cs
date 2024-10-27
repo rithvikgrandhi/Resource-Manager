@@ -115,18 +115,29 @@ namespace TalentSphere.Controllers
       return NoContent();
     }
 
-    // PUT: api/Certifications/{certificationId}/status
-    [HttpPut("{certificationId}/status")]
-    public async Task<IActionResult> UpdateCertificationStatus(int certificationId, [FromBody] certificationUpdate status)
+    private bool CertificationExists(int id)
     {
-      var certification = await _context.Certifications.FindAsync(certificationId);
+      return (_context.Certifications?.Any(e => e.CertificationId == id)).GetValueOrDefault();
+    }
+    // PATCH: api/Certifications/5/status
+    [HttpPatch("{id}/status")]
+    public async Task<IActionResult> UpdateCertificationStatus(int id, [FromBody] CertificationStatus certificationStatus)
+    {
+      if (_context.Certifications == null)
+      {
+        return NotFound();
+      }
+
+      var certification = await _context.Certifications.FindAsync(id);
+
       if (certification == null)
       {
         return NotFound();
       }
 
       // Update the status
-      certification.Status = status.status;
+      certification.Status = certificationStatus.Status;
+
       _context.Entry(certification).State = EntityState.Modified;
 
       try
@@ -135,7 +146,7 @@ namespace TalentSphere.Controllers
       }
       catch (DbUpdateConcurrencyException)
       {
-        if (!CertificationExists(certificationId))
+        if (!CertificationExists(id))
         {
           return NotFound();
         }
@@ -145,17 +156,14 @@ namespace TalentSphere.Controllers
         }
       }
 
-      return NoContent(); // Status updated successfully
+      return NoContent();
     }
 
-    private bool CertificationExists(int id)
-    {
-      return (_context.Certifications?.Any(e => e.CertificationId == id)).GetValueOrDefault();
-    }
   }
-
-  public class certificationUpdate
+  public class CertificationStatus
   {
-    public string status { get; set; }
+  
+    public bool Status { get; set; }
+   
   }
 }

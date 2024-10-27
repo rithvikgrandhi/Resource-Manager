@@ -20,7 +20,7 @@ import { HttpClient } from '@angular/common/http';
 export class CertificationRequestComponent {
   model: any = {
     userId: localStorage.getItem('user_id'),
-    certificationDate: '',
+    certificationDate: new Date(),
     certificationName: '',
     justification: ''
   };

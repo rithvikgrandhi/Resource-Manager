@@ -13,5 +13,7 @@ public partial class DirectorRequirement
 
     public string Requirements { get; set; } = null!;
 
+    public bool? Approved { get; set; }
+
     public virtual User? Dir { get; set; }
 }

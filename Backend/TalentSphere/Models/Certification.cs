@@ -7,7 +7,7 @@ public partial class Certification
 {
     public int CertificationId { get; set; }
 
-    public int UserId { get; set; }
+    public int? UserId { get; set; }
 
     public string CertificationName { get; set; } = null!;
 
@@ -15,8 +15,7 @@ public partial class Certification
 
     public string? Justification { get; set; }
 
-    public string? Status { get; set; }
+    public bool? Status { get; set; }
 
-    public virtual User User { get; set; } = null!;
-
+    public virtual User? User { get; set; }
 }

@@ -97,33 +97,29 @@ public partial class TalentsphereContext : DbContext
 
         modelBuilder.Entity<Certification>(entity =>
         {
-            entity.HasKey(e => e.CertificationId).HasName("PK__certific__185D5AECAD5FEE4E");
+            entity.HasKey(e => e.CertificationId).HasName("PK__certific__185D5AECF6D451F6");
 
             entity.ToTable("certifications");
 
             entity.Property(e => e.CertificationId).HasColumnName("certification_id");
             entity.Property(e => e.CertificationDate)
-                .HasColumnType("datetime")
+                .HasDefaultValueSql("(CONVERT([date],getdate()))")
+                .HasColumnType("date")
                 .HasColumnName("certification_date");
             entity.Property(e => e.CertificationName)
                 .HasMaxLength(255)
                 .IsUnicode(false)
                 .HasColumnName("certification_name");
             entity.Property(e => e.Justification)
-                .HasMaxLength(255)
+                .HasMaxLength(200)
                 .IsUnicode(false)
                 .HasColumnName("justification");
-            entity.Property(e => e.Status)
-                .HasMaxLength(50)
-                .IsUnicode(false)
-                .HasDefaultValueSql("('Pending')")
-                .HasColumnName("status");
+            entity.Property(e => e.Status).HasColumnName("status");
             entity.Property(e => e.UserId).HasColumnName("user_id");
 
             entity.HasOne(d => d.User).WithMany(p => p.Certifications)
                 .HasForeignKey(d => d.UserId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("fk_employee_id_cert");
+                .HasConstraintName("fk_employee_id");
         });
 
         modelBuilder.Entity<DirectorRequirement>(entity =>
@@ -133,6 +129,9 @@ public partial class TalentsphereContext : DbContext
             entity.ToTable("director_requirements");
 
             entity.Property(e => e.ReqId).HasColumnName("req_id");
+            entity.Property(e => e.Approved)
+                .HasDefaultValueSql("((0))")
+                .HasColumnName("approved");
             entity.Property(e => e.DirId).HasColumnName("dir_id");
             entity.Property(e => e.ProjectId).HasColumnName("project_id");
             entity.Property(e => e.Requirements)

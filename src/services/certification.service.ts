@@ -50,11 +50,11 @@ approveCertification(id: number): Observable<void> {
     );
   }
 
-  updateCertificationStatus(certificationId: number, status: string): Observable<void> {
+  updateCertificationStatus(certificationId: number, status: boolean): Observable<void> {
     const url = `https://localhost:7188/api/Certifications/${certificationId}/status`;
     const payload = JSON.stringify({ status: status });
 
-    return this._http.put<void>(url, payload, this.httpOptions);
+    return this._http.patch<void>(url, payload, this.httpOptions);
   }
 
   updateClient(updateClientData: any) {
