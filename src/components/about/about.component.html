@@ -10,13 +10,13 @@
         At the heart of TalentSphere lies a passionate team of innovators dedicated to transforming resource management at KPMG. With a diverse array of skills and a shared vision for excellence, these developers have come together to create a powerful platform that simplifies recruitment and elevates employee development. Join us in celebrating the creativity and commitment of the minds behind TalentSphere, where every line of code is crafted with purpose!
     </p>
     
-          <ul class="text">
-              <li>Sathvik</li>
-              <li>Rithvik</li>
-              <li>Sanjana</li>
-              <li>Gayana</li>
-              <li>Ayush</li>
-          </ul>
+    <h3>Meet the Team</h3>
+      <div class="team-grid">
+        <div class="team-member" *ngFor="let member of teamMembers">
+          <p>{{ member.name }}</p>
+        </div>
+      </div>
+    
       </div>
   </div>
 </div>

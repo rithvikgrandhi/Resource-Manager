@@ -22,6 +22,7 @@ h2 {
 
 .job-post-card button {
   margin-top: 15px; /* Space above the button */
+  margin-right: 3px;
   padding: 10px 15px; /* Padding for button */
   background-color: #007bff; /* Primary color */
   color: white; /* Text color for the button */
@@ -33,6 +34,7 @@ h2 {
 
 .job-post-card button:hover {
   background-color: #0056b3; /* Darker shade on hover */
+
 }
 
 .job-post-card button:focus {

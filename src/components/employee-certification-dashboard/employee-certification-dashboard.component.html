@@ -9,9 +9,9 @@
         <div class="request-card" *ngFor="let request of certificationRequests">
             <h3>{{ request.certificationName }}</h3>
             <p><strong>Justification:</strong> {{ request.justification }}</p>
-            <p><strong>Status:</strong> {{ request.status }}</p>
+            <p><strong>Status:</strong> {{ getStatusLabel(request.status) }}</p>
             <div class="request-date">
-                <strong>Requested On:</strong> {{ request.requestedDate | date:'shortDate' }}
+                <strong>Requested On:</strong> {{ request.certificationDate | date:'shortDate' }}
             </div>
         </div>
     </div>

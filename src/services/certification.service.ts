@@ -20,7 +20,7 @@ export class certificationService  {
   }
   
   getCertificationDetails(): Observable<Certifications[]> {
-    return this._http.get<Certifications[]>("https://localhost:7188/api/Certifications");
+    return this._http.get<Certifications[]>("https://localhost:7188/api/Certifications/UserCertifications");
   }
 
   postCertification(certification: Certifications): Observable<Certifications> {

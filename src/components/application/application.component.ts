@@ -60,7 +60,7 @@ export class ApplicationComponent implements OnInit {
    * form with the job title and skills required for the job.
    */
   ngOnInit(): void {
-    this.jobPostId = +this.route.snapshot.paramMap.get('id')!;
+    this.jobPostId = +this.route.snapshot.paramMap.get('jobPostId')!;
     
     // Fetch job post details by jobPostId
     this.apiService.getJobPostById(this.jobPostId).subscribe(

@@ -18,5 +18,5 @@
   <button (click)="goBack()">Back to Job Postings</button>
 
   <!-- Add a button to fill out the job application form -->
-  <button (click)="applyForJob()">Apply for this Job</button>
+  <button *ngIf="isApplicant$ | async" (click)="applyForJob()">Apply for this Job</button>
 </div>

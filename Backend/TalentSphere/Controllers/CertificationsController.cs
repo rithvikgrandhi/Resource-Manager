@@ -119,6 +119,56 @@ namespace TalentSphere.Controllers
     {
       return (_context.Certifications?.Any(e => e.CertificationId == id)).GetValueOrDefault();
     }
+
+    // GET: api/Certifications/Employee/5
+    [HttpGet("Employee/{userId}")]
+    public async Task<ActionResult<IEnumerable<Certification>>> GetCertificationsByEmployeeId(int userId)
+    {
+      if (_context.Certifications == null)
+      {
+        return NotFound("Certifications context is null.");
+      }
+
+      var certifications = await _context.Certifications
+                                          .Where(c => c.UserId == userId)
+                                          .ToListAsync();
+
+      if (certifications == null || certifications.Count == 0)
+      {
+        return NotFound($"No certifications found for user with ID {userId}.");
+      }
+
+      return certifications;
+    }
+
+    // GET: api/Users/Certifications
+    [HttpGet("UserCertifications")]
+    public async Task<ActionResult<IEnumerable<dynamic>>> GetUserCertifications()
+    {
+      var result = await (from u in _context.Users
+                          join c in _context.Certifications
+                          on u.UserId equals c.UserId
+                          select new
+                          {
+                            FullName = u.FullName,
+                            Email = u.Email,
+                            PhoneNumber = u.PhoneNumber,
+                            CertificationId = c.CertificationId,
+                            CertificationDate = c.CertificationDate,
+                            CertificationName = c.CertificationName,
+                            Justification = c.Justification,
+                            Status = c.Status
+                          }).ToListAsync();
+
+      if (result == null || !result.Any())
+      {
+        return NotFound("No certifications found for users.");
+      }
+
+      return Ok(result);
+    }
+
+
     // PATCH: api/Certifications/5/status
     [HttpPatch("{id}/status")]
     public async Task<IActionResult> UpdateCertificationStatus(int id, [FromBody] CertificationStatus certificationStatus)

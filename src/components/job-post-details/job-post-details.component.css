@@ -25,6 +25,7 @@
 
 .job-post-details button {
   margin-top: 20px; /* Space above the button */
+  margin-right: 2px;
   padding: 10px 15px; /* Padding for button */
   background-color: #007bff; /* Primary color */
   color: white; /* Text color for the button */
@@ -35,7 +36,7 @@
 }
 
 .job-post-details button:hover {
-  background-color: #0056b3; /* Darker shade on hover */
+  background-color: #0056b3; 
 }
 
 .job-post-details button:focus {

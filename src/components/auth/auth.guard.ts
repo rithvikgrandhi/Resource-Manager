@@ -19,14 +19,14 @@ export class AuthGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> {
-    const requiredRole = next.data['role'];
-
+    const requiredRoles = next.data['role']; // Allow multiple roles
+console.log(requiredRoles)
     return combineLatest([
       this.authService.isLoggedIn$,
-      this.authService.getRole(), // Assume this returns an Observable
+      this.authService.getRole(),
     ]).pipe(
       map(([isLoggedIn, userRole]) => {
-        if (isLoggedIn && userRole === requiredRole) {
+        if (isLoggedIn && requiredRoles.includes(userRole)) {
           return true;
         } else {
           this.router.navigate(['login']);

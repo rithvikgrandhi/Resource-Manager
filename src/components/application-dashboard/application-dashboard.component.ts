@@ -45,7 +45,7 @@ export class ApplicationDashboardComponent implements OnInit {
 
   ngOnInit() {
     this.jobPostId = +this.route.snapshot.paramMap.get('id')!;
-    this.apiCallService.getApplicationsByJobId(this.jobPostId).subscribe(
+    this.apiCallService.getApplicationsByJobPostId(this.jobPostId).subscribe(
       (data) => {
         this.applications = data;
         console.log(this.applications);

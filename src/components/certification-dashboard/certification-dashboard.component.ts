@@ -4,7 +4,6 @@ import { NgForOf, NgIf } from '@angular/common';
 import { certificationService } from '../../services/certification.service';
 
 export interface Certifications {
-  username:string,
   fullName: string,
   email: string,
   phoneNumber:string,
@@ -25,11 +24,10 @@ export interface Certifications {
 
 export class CertificationDashboardComponent implements OnInit {
   certificationRequests: Certifications[] = [];
-restUserData : certificationService
+  restUserData: certificationService;
+
   constructor(private _certifications: certificationService) {
-
-    this.restUserData=_certifications;
-
+    this.restUserData = _certifications;
   }
 
   ngOnInit(): void {
@@ -44,7 +42,7 @@ restUserData : certificationService
   }
 
   approveRequest(request: Certifications): void {
-    request.status = true // Optimistic UI Update
+    request.status = true; // Optimistic UI Update
     this._certifications.updateCertificationStatus(request.certificationId, true).subscribe(
       () => console.log('Request approved successfully.'),
       (error) => console.error('Error approving request:', error)
@@ -58,8 +56,16 @@ restUserData : certificationService
       (error) => console.error('Error rejecting request:', error)
     );
   }
-  
-  getStatusClass(status: boolean): string {
-    return status ? 'status-approved' : status == false ? 'status-rejected' : '';
+
+  getStatusClass(status: boolean | null): string {
+    if (status === true) return 'status-approved';
+    if (status === false) return 'status-rejected';
+    return 'status-pending'; // Assuming a CSS class for pending status
+  }
+
+  getStatusText(status: boolean | null): string {
+    if (status === true) return 'Approved';
+    if (status === false) return 'Rejected';
+    return 'Pending'; // Assuming a text for pending status
   }
 }

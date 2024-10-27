@@ -12,6 +12,6 @@
     <p><strong>Status:</strong> {{ job.status }}</p>
 
     <button (click)="viewJobDetails(job.jobPostId)">View Details</button>
-    <button (click)="viewApplicants(job.jobPostId)">View Details</button>
+    <button *ngIf="isHR$ | async" (click)="viewApplicants(job.jobPostId)">View Applications</button>
   </div>
 </div>

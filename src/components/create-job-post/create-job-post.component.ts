@@ -30,7 +30,8 @@ export class CreateJobPostComponent {
     console.log('Job Post Created:', this.jobPost);
 
     this.apiCallService.postJobPosts(this.jobPost);
+
     // After submission, redirect or show a success message
-    // this.router.navigate(['/job-posts']);
+    this.router.navigate(['/list-jobposts']);
   }
 }

@@ -1,7 +1,8 @@
-import { DatePipe, NgForOf } from '@angular/common';
+import { AsyncPipe, DatePipe, NgForOf, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ApiCallService } from '../services/api-call.service';
 import { Router } from '@angular/router';
+import { Observable, map } from 'rxjs';
 
 export interface JobPost {
   jobPostId: number;
@@ -16,7 +17,7 @@ export interface JobPost {
 @Component({
   selector: 'app-list-job-posts',
   standalone: true,
-  imports: [DatePipe, NgForOf],
+  imports: [DatePipe, NgForOf, NgIf, AsyncPipe],
   templateUrl: './list-job-posts.component.html',
   styleUrl: './list-job-posts.component.css',
 })
@@ -55,7 +56,11 @@ export class ListJobPostsComponent implements OnInit {
   ]; */
 
   JobPosts: JobPost[] = [];
+  isHR$!:Observable<boolean>;
   ngOnInit():void {
+    this.isHR$ = this.apiService.getRole().pipe(
+      map(role => role === 'HR')
+    );
     this.apiService.getAllJobPosts().subscribe(
       (data: JobPost[]) => {
         this.JobPosts = data; // Assign the data to the jobPosts array
@@ -70,6 +75,7 @@ export class ListJobPostsComponent implements OnInit {
   viewJobDetails(jobPostId: number): void {
     this.router.navigate(['/job-posts', jobPostId]);
   }
+  
 
   viewApplicants(jobPostId: number): void{
     this.router.navigate(['/application-dashboard', jobPostId])

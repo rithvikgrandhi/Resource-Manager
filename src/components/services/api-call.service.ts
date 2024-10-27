@@ -6,6 +6,7 @@ import { catchError } from 'rxjs/operators';
 import { Application } from '../application/application.component';
 import { UserApplication } from '../applicant-applications/applicant-applications.component';
 import { ApplicationHR } from '../application-dashboard/application-dashboard.component';
+import { CertificationRequest } from '../employee-certification-dashboard/employee-certification-dashboard.component';
 
 export interface User {
   userId: number;
@@ -29,6 +30,10 @@ export class ApiCallService {
   getUserById(userId: number): Observable<User> {
     const url = `https://localhost:7188/api/Users/${userId}`;
     return this.http.get<User>(url).pipe(catchError(this.handleError));
+  }
+  getCertificationsByUserId(userId:number): Observable<CertificationRequest[]>{
+    const url = `https://localhost:7188/api/Certifications/Employee/${userId}`
+    return this.http.get<CertificationRequest[]>(url).pipe(catchError(this.handleError))
   }
 
   registerUser(user: any) {
@@ -77,7 +82,7 @@ export class ApiCallService {
     });
   }
 
-  getApplicationsByJobId(jobPostId: number): Observable<ApplicationHR[]> {
+  getApplicationsByJobPostId(jobPostId: number): Observable<ApplicationHR[]> {
     const url = `https://localhost:7188/api/Applications/post/${jobPostId}`;
     return this.http
       .get<ApplicationHR[]>(url)

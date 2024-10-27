@@ -1,36 +1,29 @@
-
 <header class="navbar">
-    <img src="images/logo.png" class="logo" alt="Logo">
-    <h2 class="Title">TalentSphere</h2>
+  <img src="images/logo.png" class="logo" alt="Logo" />
+  <h2 class="Title" routerLink="/home" >TalentSphere</h2>
   <nav>
     <ul>
-
-
-      <!-- { path: 'application', component: ApplicationComponent },
-      { path: 'request-certification', component: CertificationRequestComponent },
-      { path: 'mycertifications',component: EmployeeCertificationDashboardComponent,},
-      { path: 'certifications', component: CertificationDashboardComponent },
-      { path: 'application-dashboard', component: ApplicationDashboardComponent },
-      { path: 'applicant-dashboard', component: ApplicantDashboardComponent }, -->
-    
-
-      
       <li><a routerLink="/about">About Us</a></li>
       <li><a routerLink="/contact">Contact Us</a></li>
-      <li><a routerLink="/login">Login/Register</a></li>
-      <li><a routerLink="/services">Services</a></li>
-      <li><a routerLink="/director">Director</a></li>
-      <li><a routerLink="/hrportal">HR Portal</a></li>
-      <li><a routerLink="/application">application</a></li>
-      <li><a routerLink="/request-certification">request-certification</a></li>
-      <li><a routerLink="/mycertifications">mycertifications</a></li>
-      <li><a routerLink="/certifications">certifications</a></li>
-      <li><a routerLink="/application-dashboard">application-dashboard</a></li>
-      <li><a routerLink="/applicant-dashboard">applicant-dashboard</a></li>
+      <li><a *ngIf="!(isLoggedIn$ | async)" routerLink="login">Login</a></li>
+      <li *ngIf="isLoggedIn$ | async">
+        <a (click)="logout()" routerLink="/login" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Logout</a>
+      </li>
+      
+      <li *ngIf="hasAnyRole(['Director']) | async"><a routerLink="/director">Request Resources</a></li>
+      <li *ngIf="hasAnyRole(['HR']) | async"><a routerLink="/hrportal">HR Portal</a></li>
+      <li *ngIf="hasAnyRole(['HR']) | async"><a routerLink="/create-job-post">Create Job Post</a></li>
+
+      <li *ngIf="hasAnyRole(['Applicant', 'HR']) | async"><a routerLink="/list-jobposts">Job Posts</a></li>
+
+      <li *ngIf="hasAnyRole(['Employee']) | async"><a routerLink="/request-certification">Request Certification</a></li>
+      <li *ngIf="hasAnyRole(['Employee']) | async"><a routerLink="/mycertifications">My Certifications</a></li>
+      <li *ngIf="hasAnyRole(['HR']) | async"><a routerLink="/certifications">Certifications</a></li>
+      <li *ngIf="hasAnyRole(['Applicant']) | async"><a routerLink="/myapplications">My Applications</a></li>
+      <!-- <li *ngIf="hasAnyRole(['Applicant']) | async"><a routerLink="/application/:jobPostId">Apply for Job</a></li> -->
+      <li *ngIf="hasAnyRole(['Director']) | async"><a routerLink="/projects">Projects</a></li>
     </ul>
   </nav>
 </header>
 
-<!-- <app-director></app-director>
-<app-hrportal></app-hrportal> -->
 <router-outlet></router-outlet>
