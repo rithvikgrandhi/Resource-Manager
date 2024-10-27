@@ -12,17 +12,18 @@ import { FormsModule } from '@angular/forms';
 })
 export class DirectorComponent {
   projects: any[] = [
-    { id: '1', name: 'Project Phoenix - New Beginnings' },
-    { id: '2', name: 'Project Orion - Star Navigation' },
-    { id: '3', name: 'Project Atlas - Global Mapping' },
-    { id: '4', name: 'Project Nimbus - Cloud Computing' },
-    { id: '5', name: 'Project Aurora - AI Innovation' },
-    { id: '6', name: 'Project Titan - Infrastructure Overhaul' },
-    { id: '7', name: 'Project Echo - Voice Recognition' },
-    { id: '8', name: 'Project Quasar - Data Analytics' },
-    { id: '9', name: 'Project Odyssey - User Experience Redesign' },
-    { id: '10', name: 'Project Legacy - Archival System' },
+    { id: '1', name: 'Phoenix' },
+    { id: '2', name: 'Orion' },
+    { id: '3', name: 'Atlas' },
+    { id: '4', name: 'Nimbus' },
+    { id: '5', name: 'Aurora' },
+    { id: '6', name: 'Titan' },
+    { id: '7', name: 'Echo' },
+    { id: '8', name: 'Quasar' },
+    { id: '9', name: 'Odyssey' },
+    { id: '10', name: 'Legacy' },
 ];
+
 
   skills: any[] = [
     { name: 'Frontend' },

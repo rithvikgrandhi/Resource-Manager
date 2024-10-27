@@ -6,7 +6,7 @@
       <thead>
         <tr>
           <th>Request ID</th>
-          <th>Director ID</th>
+          <th>Director Name</th>
           <th>Project ID</th>
           <th>Skills Required</th>
           <th>Actions</th>
@@ -15,13 +15,15 @@
       <tbody>
         <tr *ngFor="let request of requests" [ngClass]="{'approved-row': request.approved}">
           <td>{{ request.reqId }}</td>
-          <td>{{ request.dirId }}</td>
-          <td>{{ request.projectId }}</td>
+          <td>{{ names[request.dirId]}}</td> <!-- Fetching Director Name -->
+          <td>{{ projects[request.projectId].name }}</td>
           <td>{{ request.requirements }}</td>
           <td>
             <button 
               (click)="approve(request.reqId, request.projectId, request.dirId)" 
-              [disabled]="request.approved">{{request.approved? 'Approved': 'Approve'}}</button>
+              [disabled]="request.approved || request.disabled">
+              {{ request.approved ? 'Approved' : 'Approve' }}
+            </button>
           </td>
         </tr>
       </tbody>

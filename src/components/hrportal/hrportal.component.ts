@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 
 export interface Project {
   projectId: number;
@@ -23,6 +24,20 @@ export interface Employee {
 export class HrportalComponent implements OnInit {
   requests: any[] = []; // Initialize as an array
   countedSkills: { [key: string]: number } = {}; // Initialize countedSkills
+  names: { [key: number]: string } = {}; // Dictionary to store names
+  projects: any[] = [
+    { id: '1', name: 'Phoenix' },
+    { id: '2', name: 'Orion' },
+    { id: '3', name: 'Atlas' },
+    { id: '4', name: 'Nimbus' },
+    { id: '5', name: 'Aurora' },
+    { id: '6', name: 'Titan' },
+    { id: '7', name: 'Echo' },
+    { id: '8', name: 'Quasar' },
+    { id: '9', name: 'Odyssey' },
+    { id: '10', name: 'Legacy' },
+];
+
 
   constructor(private http: HttpClient) {}
 
@@ -158,32 +173,54 @@ export class HrportalComponent implements OnInit {
           disabled: false, // Initialize disabled based on your logic
           approved: req.approved // Ensure this property exists in your API response
         }));
+
+        // Fetch names for each directorId
+        this.requests.forEach(req => {
+          this.fetchName(req.dirId); // Fetch name and store it
+        });
+
         this.countSkills(); // Call to count skills after fetching requests
+        console.log("requests====", this.requests);
       },
       error: err => console.error('Error fetching data:', err)
     });
   }
+
+  private fetchName(id: number) {
+    if (this.names[id]) {
+      return; // If the name is already fetched, do nothing
+    }
+
+    this.http.get<any>(`https://localhost:7177/api/Users/${id}`).subscribe(
+      (response) => {
+        this.names[id] = response.fullName; // Adjust according to your response structure
+      },
+      error => {
+        console.error('Error fetching user:', error);
+      }
+    );
+  }
+
   private countSkills() {
     this.countedSkills = {}; // Reset counted skills
 
     this.http.get<Employee[]>("https://localhost:7177/api/AvailableEmps").subscribe({
-        next: (data) => {
-            console.log("scam",data);
-            // Count skills from the fetched employee data
-            data.forEach(employee => {
-                const skill = employee.skill; // Get the employee's skill
-                if (skill) {
-                    this.countedSkills[skill] = (this.countedSkills[skill] || 0) + 1; // Increment count for the skill
-                }
-            });
+      next: (data) => {
+        console.log("scam", data);
+        // Count skills from the fetched employee data
+        data.forEach(employee => {
+          const skill = employee.skill; // Get the employee's skill
+          if (skill) {
+            this.countedSkills[skill] = (this.countedSkills[skill] || 0) + 1; // Increment count for the skill
+          }
+        });
 
-            // Log counted skills for debugging
-            console.log('Counted Skills:', this.countedSkills);
-        },
-        error: err => {
-            console.error('Error fetching employee data:', err);
-        }
+        // Log counted skills for debugging
+        console.log('Counted Skills:', this.countedSkills);
+      },
+      error: err => {
+        console.error('Error fetching employee data:', err);
+      }
     });
-}
-
+  }
 }
