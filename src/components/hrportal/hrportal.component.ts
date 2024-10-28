@@ -46,7 +46,7 @@ export class HrportalComponent implements OnInit {
   }
 
   removeEmployee(employeeId: number) {
-    this.http.delete(`https://localhost:7188/api/AvailableEmps/${employeeId}`).subscribe({
+    this.http.delete(`https://talentsphere.azurewebsites.net/api/AvailableEmps/${employeeId}`).subscribe({
       next: () => console.log(`Successfully removed employee with ID: ${employeeId}`),
       error: err => console.error('Error removing employee:', err)
     });
@@ -75,7 +75,7 @@ export class HrportalComponent implements OnInit {
       dir: selectedRequest.dir // Include other necessary fields
     };
 
-    this.http.put(`https://localhost:7188/api/DirectorRequirements/${reqId}`, fullRequest).subscribe({
+    this.http.put(`https://talentsphere.azurewebsites.net/api/DirectorRequirements/${reqId}`, fullRequest).subscribe({
       next: () => {
         this.handleApprovedRequest(selectedRequest, projectId, directorId);
       },
@@ -99,7 +99,7 @@ export class HrportalComponent implements OnInit {
   }
 
   private fetchAvailableEmployees(skill: string, countValue: number, projectId: number, directorId: number) {
-    this.http.get<Employee[]>(`https://localhost:7188/api/AvailableEmps/GetBySkill/${skill}`).subscribe({
+    this.http.get<Employee[]>(`https://talentsphere.azurewebsites.net/api/AvailableEmps/GetBySkill/${skill}`).subscribe({
       next: (employees) => {
         if (employees.length === 0) {
           alert('There are no employees left to assign for this skill.');
@@ -121,7 +121,7 @@ export class HrportalComponent implements OnInit {
   }
 
   private allocateUser(reqId: number, directorId: number, userId: number) {
-    this.http.get<Project[]>(`https://localhost:7188/api/ProjectDeets`).subscribe({
+    this.http.get<Project[]>(`https://talentsphere.azurewebsites.net/api/ProjectDeets`).subscribe({
       next: (projects) => {
         const project = projects.find(p => p.projectId === reqId);
         if (project) {
@@ -146,7 +146,7 @@ export class HrportalComponent implements OnInit {
       members: members.join(', ')
     };
 
-    this.http.put(`https://localhost:7188/api/ProjectDeets/${project.projectId}`, updatedProject).subscribe({
+    this.http.put(`https://talentsphere.azurewebsites.net/api/ProjectDeets/${project.projectId}`, updatedProject).subscribe({
       next: () => console.log(`User ${userId} allocated to project ${project.projectId}`),
       error: err => console.error('Error allocating user:', err)
     });
@@ -159,14 +159,14 @@ export class HrportalComponent implements OnInit {
       members: userId.toString() // Start with the new user as the only member
     };
 
-    this.http.post(`https://localhost:7188/api/ProjectDeets`, newProject).subscribe({
+    this.http.post(`https://talentsphere.azurewebsites.net/api/ProjectDeets`, newProject).subscribe({
       next: () => console.log(`New project created and user ${userId} allocated to it.`),
       error: err => console.error('Error creating new project:', err)
     });
   }
 
   private getRequests() {
-    this.http.get<any[]>('https://localhost:7188/api/DirectorRequirements').subscribe({
+    this.http.get<any[]>('https://talentsphere.azurewebsites.net/api/DirectorRequirements').subscribe({
       next: (data) => {
         this.requests = data.map(req => ({
           ...req,
@@ -191,7 +191,7 @@ export class HrportalComponent implements OnInit {
       return; // If the name is already fetched, do nothing
     }
 
-    this.http.get<any>(`https://localhost:7188/api/Users/${id}`).subscribe(
+    this.http.get<any>(`https://talentsphere.azurewebsites.net/api/Users/${id}`).subscribe(
       (response) => {
         this.names[id] = response.fullName; // Adjust according to your response structure
       },
@@ -204,7 +204,7 @@ export class HrportalComponent implements OnInit {
   private countSkills() {
     this.countedSkills = {}; // Reset counted skills
 
-    this.http.get<Employee[]>("https://localhost:7188/api/AvailableEmps").subscribe({
+    this.http.get<Employee[]>("https://talentsphere.azurewebsites.net/api/AvailableEmps").subscribe({
       next: (data) => {
         console.log("scam", data);
         // Count skills from the fetched employee data

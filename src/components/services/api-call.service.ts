@@ -22,17 +22,24 @@ export interface User {
   providedIn: 'root',
 })
 export class ApiCallService {
+
+  
   private loggedIn = new BehaviorSubject<boolean>(this.isLoggedIn());
   isLoggedIn$ = this.loggedIn.asObservable();
 
   constructor(private http: HttpClient) {}
 
   getUserById(userId: number): Observable<User> {
-    const url = `https://localhost:7188/api/Users/${userId}`;
+    const url = `https://talentsphere.azurewebsites.net/api/Users/${userId}`;
     return this.http.get<User>(url).pipe(catchError(this.handleError));
   }
+
+  getUsername(): string {
+    console.log("user naem", localStorage.getItem('userName'))
+    return localStorage.getItem('userName')??''
+  }
   getCertificationsByUserId(userId:number): Observable<CertificationRequest[]>{
-    const url = `https://localhost:7188/api/Certifications/Employee/${userId}`
+    const url = `https://talentsphere.azurewebsites.net/api/Certifications/Employee/${userId}`
     return this.http.get<CertificationRequest[]>(url).pipe(catchError(this.handleError))
   }
 
@@ -44,7 +51,7 @@ export class ApiCallService {
     );
   }
   checkCredentials(form: any): Observable<any> {
-    const url = 'https://localhost:7188/api/Users/login';
+    const url = 'https://talentsphere.azurewebsites.net/api/Users/login';
     return this.http.post(url, form).pipe(catchError(this.handleError));
   }
 
@@ -55,6 +62,7 @@ export class ApiCallService {
   logout(): void {
     localStorage.removeItem('userId');
     localStorage.removeItem('userRole');
+    localStorage.removeItem('userName')
     this.loggedIn.next(false);
   }
 
@@ -63,14 +71,14 @@ export class ApiCallService {
   }
 
   getApplicationsByUserId(userId: number): Observable<UserApplication[]> {
-    const url = `https://localhost:7188/api/Applications/user/${userId}`;
+    const url = `https://talentsphere.azurewebsites.net/api/Applications/user/${userId}`;
     return this.http
       .get<UserApplication[]>(url)
       .pipe(catchError(this.handleError));
   }
 
   getAllJobPosts(): Observable<JobPost[]> {
-    const url = 'https://localhost:7188/api/JobPosts';
+    const url = 'https://talentsphere.azurewebsites.net/api/JobPosts';
     return this.http.get<JobPost[]>(url).pipe(catchError(this.handleError));
   }
 
@@ -83,14 +91,14 @@ export class ApiCallService {
   }
 
   getApplicationsByJobPostId(jobPostId: number): Observable<ApplicationHR[]> {
-    const url = `https://localhost:7188/api/Applications/post/${jobPostId}`;
+    const url = `https://talentsphere.azurewebsites.net/api/Applications/post/${jobPostId}`;
     return this.http
       .get<ApplicationHR[]>(url)
       .pipe(catchError(this.handleError));
   }
 
   submitApplication(application: Application): void {
-    const url = 'https://localhost:7188/api/Applications';
+    const url = 'https://talentsphere.azurewebsites.net/api/Applications';
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
     this.http
@@ -115,7 +123,7 @@ export class ApiCallService {
       lastUpdated: new Date(),
     };
 
-    const url = `https://localhost:7188/api/Applications/${application.applicationId}`;
+    const url = `https://talentsphere.azurewebsites.net/api/Applications/${application.applicationId}`;
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
     this.http
@@ -128,7 +136,7 @@ export class ApiCallService {
   }
 
   postJobPosts(form: any): void {
-    const url = 'https://localhost:7188/api/JobPosts';
+    const url = 'https://talentsphere.azurewebsites.net/api/JobPosts';
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
 
     this.http
@@ -143,7 +151,7 @@ export class ApiCallService {
   }
 
   getJobPostById(id: number): Observable<JobPost> {
-    const url = `https://localhost:7188/api/JobPosts/${id}`;
+    const url = `https://talentsphere.azurewebsites.net/api/JobPosts/${id}`;
     return this.http.get<JobPost>(url).pipe(catchError(this.handleError));
   }
 

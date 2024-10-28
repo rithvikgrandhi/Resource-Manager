@@ -20,24 +20,24 @@ export class certificationService  {
   }
   
   getCertificationDetails(): Observable<Certifications[]> {
-    return this._http.get<Certifications[]>("https://localhost:7188/api/Certifications/UserCertifications");
+    return this._http.get<Certifications[]>("https://talentsphere.azurewebsites.net/api/Certifications/UserCertifications");
   }
 
   postCertification(certification: Certifications): Observable<Certifications> {
-    return this._http.post<Certifications>("https://localhost:7188/api/Certifications", certification);
+    return this._http.post<Certifications>("https://talentsphere.azurewebsites.net/api/Certifications", certification);
 }
   putCertification(id: number, certification: Certifications): Observable<void> {
-  return this._http.put<void>(`https://localhost:7188/api/Certifications/${id}`, certification);
+  return this._http.put<void>(`https://talentsphere.azurewebsites.net/api/Certifications/${id}`, certification);
 }
 
   deleteCertification(id: number): Observable<void> {
-    return this._http.delete<void>(`https://localhost:7188/api/Certifications/${id}`);
+    return this._http.delete<void>(`https://talentsphere.azurewebsites.net/api/Certifications/${id}`);
 }
 
 approveCertification(id: number): Observable<void> {
   const payload = JSON.stringify({ status: 'Approved' });
   return this._http.put<void>(
-    `https://localhost:7188/api/Certifications/${id}/status`, 
+    `https://talentsphere.azurewebsites.net/api/Certifications/${id}/status`, 
     payload, 
     this.httpOptions
   );
@@ -45,20 +45,20 @@ approveCertification(id: number): Observable<void> {
 
   rejectCertification(id: number): Observable<void> {
     return this._http.post<void>(
-      `https://localhost:7188/api/Certifications/${id}/reject`,
+      `https://talentsphere.azurewebsites.net/api/Certifications/${id}/reject`,
       null
     );
   }
 
   updateCertificationStatus(certificationId: number, status: boolean): Observable<void> {
-    const url = `https://localhost:7188/api/Certifications/${certificationId}/status`;
+    const url = `https://talentsphere.azurewebsites.net/api/Certifications/${certificationId}/status`;
     const payload = JSON.stringify({ status: status });
 
     return this._http.patch<void>(url, payload, this.httpOptions);
   }
 
   updateClient(updateClientData: any) {
-    const url = `https://localhost:7188/api/Certifications/${updateClientData.certificationId}/status`;
+    const url = `https://talentsphere.azurewebsites.net/api/Certifications/${updateClientData.certificationId}/status`;
     const payload = JSON.stringify({ status: updateClientData.status });
 
     this._http.put(url, payload, this.httpOptions).subscribe(response => {

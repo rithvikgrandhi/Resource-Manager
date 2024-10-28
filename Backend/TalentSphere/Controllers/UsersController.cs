@@ -68,7 +68,7 @@ namespace TalentSphere.Controllers
       }
 
       // Return the user details (excluding password)
-      return Ok(new { user.UserId, user.Username, user.Role });
+      return Ok(new { user.UserId, user.Username, user.Role, user.FullName });
     }
 
     // PUT: api/Users/5

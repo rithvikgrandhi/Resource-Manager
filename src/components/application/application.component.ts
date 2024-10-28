@@ -84,5 +84,6 @@ export class ApplicationComponent implements OnInit {
 
     // Call API service to submit the form data
     this.apiService.submitApplication(this.model)
+    this.router.navigateByUrl(`/myapplications/${localStorage.getItem('userId')}`)
   }
 }

@@ -3,7 +3,10 @@
   justify-content: center; /* Center the card horizontally */
   align-items: center; /* Center the card vertically */
   padding: 40px; /* Spacing around the section */
-  background-color: #f4f4f4; /* Light background color */
+  background-color: #fff; /* Light background color */
+}
+body{
+  background-color: #f4f4f4;
 }
 
 .card {
@@ -16,14 +19,14 @@
 }
 
 .title {
-  font-size: 2em; /* Larger font size for title */
-  color: #333; /* Dark text color */
+  font-family: "HeadingFont";
+  font-size: 3.5rem; /* Larger font size for title */
   margin-bottom: 20px; /* Spacing below title */
 }
 
 .text {
+  font-family: 'Univers';
   font-size: 1.1em; /* Slightly larger font size for text */
-  color: #555; /* Medium grey text color */
   line-height: 1.6; /* Increased line height for readability */
   margin-bottom: 15px; /* Spacing below each paragraph */
 }
@@ -39,14 +42,14 @@ li {
 }
 
 .team-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 10px;
-  }
-  
-  .team-member {
-    background: #eaeaea;
-    padding: 10px;
-    border-radius: 5px;
-    text-align: center;
-  }
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 10px;
+}
+
+.team-member {
+  background: #eaeaea;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: center;
+}

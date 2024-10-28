@@ -19,9 +19,9 @@
       <li *ngIf="hasAnyRole(['Employee']) | async"><a routerLink="/request-certification">Request Certification</a></li>
       <li *ngIf="hasAnyRole(['Employee']) | async"><a routerLink="/mycertifications">My Certifications</a></li>
       <li *ngIf="hasAnyRole(['HR']) | async"><a routerLink="/certifications">Certifications</a></li>
-      <li *ngIf="hasAnyRole(['Applicant']) | async"><a routerLink="/myapplications">My Applications</a></li>
-      <!-- <li *ngIf="hasAnyRole(['Applicant']) | async"><a routerLink="/application/:jobPostId">Apply for Job</a></li> -->
+      <li *ngIf="hasAnyRole(['Applicant']) | async"><a routerLink="/myapplications/{{userId}}">My Applications</a></li>
       <li *ngIf="hasAnyRole(['Director']) | async"><a routerLink="/projects">Projects</a></li>
+
     </ul>
   </nav>
 </header>

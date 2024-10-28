@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
@@ -8,7 +8,7 @@ import { FormsModule } from '@angular/forms';
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './director.component.html',
-  styleUrls: ['./director.component.css']
+  styleUrls: ['./director.component.css'],
 })
 export class DirectorComponent {
   projects: any[] = [
@@ -22,8 +22,7 @@ export class DirectorComponent {
     { id: '8', name: 'Quasar' },
     { id: '9', name: 'Odyssey' },
     { id: '10', name: 'Legacy' },
-];
-
+  ];
 
   skills: any[] = [
     { name: 'Frontend' },
@@ -39,15 +38,21 @@ export class DirectorComponent {
   res: any = {};
   res2: any;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   postData(data: any) {
-    return this.http.post<any>("https://localhost:7188/api/DirectorRequirements", data);
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+    return this.http.post<any>(
+      'https://talentsphere.azurewebsites.net/api/DirectorRequirements',
+      data,
+      { headers }
+    )
   }
 
   async submitRequest(formdata: any) {
-    localStorage.setItem("reqs", JSON.stringify(formdata.value));
-    this.dir_id = Number(localStorage.getItem('dir_id')) || 0;
+    localStorage.setItem('reqs', JSON.stringify(formdata.value));
+    this.dir_id = Number(localStorage.getItem('userId')) || 0;
     formdata.value['dir_id'] = this.dir_id;
 
     console.log(formdata.value);
@@ -59,25 +64,25 @@ export class DirectorComponent {
         backend: formdata.value.BackendCount,
         database: formdata.value.DatabaseCount,
         fullstack: formdata.value.FullstackCount,
-        cloud: formdata.value.CloudCount
-      })
+        cloud: formdata.value.CloudCount,
+      }),
     };
-    console.log("check1",this.res);
+    console.log('check1', this.res);
 
     // Post the data
 
     console.log(this.res);
     this.postData(this.res).subscribe(
-      response => {
+      (response) => {
         console.log('Data posted successfully:', response);
       },
-      error => {
+      (error) => {
         console.error('Error posting data:', error);
       }
     );
 
     // Fetch the data
-    // this.http.get('https://localhost:7188/api/DirectorRequirements/5').subscribe(
+    // this.http.get('https://talentsphere.azurewebsites.net/api/DirectorRequirements/5').subscribe(
     //   data => {
     //     this.res2 = data;
     //     console.log(this.res2.requirements); // Log the entire response

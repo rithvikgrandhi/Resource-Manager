@@ -35,6 +35,7 @@ import { ApiCallService } from '../components/services/api-call.service';
 export class AppComponent {
   title = 'TalentSphere';
   isLoggedIn$: Observable<boolean>;
+  userId!: number;
   userRole$: Observable<string | null>;
 
  
@@ -56,5 +57,6 @@ export class AppComponent {
   constructor(private apiCallService: ApiCallService, private router: Router) {
     this.isLoggedIn$ = this.apiCallService.isLoggedIn$;
     this.userRole$ = this.apiCallService.getRole(); // Observable for user role
+    this.userId = parseInt(localStorage.getItem('userId')??'1')
   }
 }

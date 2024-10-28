@@ -39,7 +39,7 @@ export class ProjectsComponent implements OnInit {
   }
 
   getProjects() {
-    this.http.get<Project[]>("https://localhost:7188/api/ProjectDeets").subscribe((data) => {
+    this.http.get<Project[]>("https://talentsphere.azurewebsites.net/api/ProjectDeets").subscribe((data) => {
       this.deets = data;
       this.deets.forEach(project => {
         this.fetchDirectorName(project.directorId); // Fetch director name for each project
@@ -52,7 +52,7 @@ export class ProjectsComponent implements OnInit {
       return; // If the name is already fetched, do nothing
     }
 
-    this.http.get<any>(`https://localhost:7188/api/Users/${id}`).subscribe(
+    this.http.get<any>(`https://talentsphere.azurewebsites.net/api/Users/${id}`).subscribe(
       (response) => {
         this.directorNames[id] = response.fullName; // Store the director's full name
       },

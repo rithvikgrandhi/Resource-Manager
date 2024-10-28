@@ -42,6 +42,7 @@ export class LoginComponent {
           console.log(response)
           localStorage.setItem('userId', response.userId); // Store token in local storage
           localStorage.setItem('userRole', response.role)
+          localStorage.setItem('userName', response.fullName);
           this.apiCallService.login()
           this.router.navigate(['/home']); // Navigate to a protected route
         },

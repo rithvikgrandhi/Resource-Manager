@@ -59,7 +59,7 @@ export class CertificationRequestComponent {
     this.model['userId'] = parseInt(localStorage.getItem('userId') ?? '0');
     console.log('check1', this.model);
     this.http
-      .post('https://localhost:7188/api/Certifications', this.model)
+      .post('https://talentsphere.azurewebsites.net/api/Certifications', this.model)
       .subscribe((data) => {
         console.log(data);
       });

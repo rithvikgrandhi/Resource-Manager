@@ -1,28 +1,28 @@
 <div class="container">
-    <header class="header">
-      <h1>TalentSphere</h1>
-    </header>
+  
+  <header class="header" *ngIf="isLoggedIn$ | async">
+    <h1>TalentSphere</h1>
+    <h2 class="Welcome">Welcome, {{ username }}!</h2> <!-- Welcome message with username -->
+  </header>
+  
+  <main class="main-content">
+    <p>Your trusted platform for optimizing resources efficiently.</p>
     
-    <main class="main-content">
-      <p>Your trusted platform for optimizing resources efficiently.</p>
-      
-      <!-- Card Section -->
-      <section class="card-section">
-        <div class="card">
-          <h3>Director and Requirements</h3>
-          <p>Manage project resources, collaborate with HR, and view employee lists.</p>
-        </div>
-        <div class="card">
-          <h3>External Hiring</h3>
-          <p>Post jobs, review applications, and track applicant status through the dashboard.</p>
-        </div>
-        <div class="card">
-          <h3>Certifications</h3>
-          <p>Request certifications, get approvals from HR, and track application status.</p>
-        </div>
-      </section>
-      
-    </main>
+    <!-- Card Section -->
+    <section class="card-section">
+      <div class="card">
+        <h3>Director and Requirements</h3>
+        <p>Manage project resources, collaborate with HR, and view employee lists.</p>
+      </div>
+      <div class="card">
+        <h3>External Hiring</h3>
+        <p>Post jobs, review applications, and track applicant status through the dashboard.</p>
+      </div>
+      <div class="card">
+        <h3>Certifications</h3>
+        <p>Request certifications, get approvals from HR, and track application status.</p>
+      </div>
+    </section>
     
-   
-  </div>
+  </main>
+</div>
