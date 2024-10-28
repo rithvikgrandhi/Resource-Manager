@@ -1,29 +1,64 @@
-import { NgFor } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+
+export interface Project {
+  projectId: number;
+  directorId: number;
+  members: string; // Assuming this is a comma-separated string
+}
 
 @Component({
   selector: 'app-projects',
   standalone: true,
-  imports: [NgFor],
+  imports: [CommonModule],
   templateUrl: './projects.component.html',
-  styleUrl: './projects.component.css'
+  styleUrls: ['./projects.component.css']
 })
-export class ProjectsComponent {
+export class ProjectsComponent implements OnInit {
+
+  projects: any[] = [
+    { id: '1', name: 'Phoenix' },
+    { id: '2', name: 'Orion' },
+    { id: '3', name: 'Atlas' },
+    { id: '4', name: 'Nimbus' },
+    { id: '5', name: 'Aurora' },
+    { id: '6', name: 'Titan' },
+    { id: '7', name: 'Echo' },
+    { id: '8', name: 'Quasar' },
+    { id: '9', name: 'Odyssey' },
+    { id: '10', name: 'Legacy' },
+];
+  deets: Project[] = [];
+  directorNames: { [key: number]: string } = {}; // Dictionary to store director names
 
   constructor(private http: HttpClient) { }
 
-  deets:any;
-
-  ngOnInit(){
-    this.get_pojs();  
+  ngOnInit() {
+    this.getProjects();  
   }
-  get_pojs(){
-  
-   this.http.get("https://localhost:7188/api/ProjectDeets").subscribe((data)=>{
-    this.deets = data
-  });
 
-}
+  getProjects() {
+    this.http.get<Project[]>("https://localhost:7188/api/ProjectDeets").subscribe((data) => {
+      this.deets = data;
+      this.deets.forEach(project => {
+        this.fetchDirectorName(project.directorId); // Fetch director name for each project
+      });
+    });
+  }
 
+  private fetchDirectorName(id: number) {
+    if (this.directorNames[id]) {
+      return; // If the name is already fetched, do nothing
+    }
+
+    this.http.get<any>(`https://localhost:7188/api/Users/${id}`).subscribe(
+      (response) => {
+        this.directorNames[id] = response.fullName; // Store the director's full name
+      },
+      error => {
+        console.error('Error fetching director name:', error);
+      }
+    );
+  }
 }

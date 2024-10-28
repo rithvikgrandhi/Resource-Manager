@@ -12,10 +12,18 @@ import { FormsModule } from '@angular/forms';
 })
 export class DirectorComponent {
   projects: any[] = [
-    { id: '1', name: 'Project Alpha' },
-    { id: '2', name: 'Project Beta' },
-    { id: '3', name: 'Project Gamma' },
-  ];
+    { id: '1', name: 'Phoenix' },
+    { id: '2', name: 'Orion' },
+    { id: '3', name: 'Atlas' },
+    { id: '4', name: 'Nimbus' },
+    { id: '5', name: 'Aurora' },
+    { id: '6', name: 'Titan' },
+    { id: '7', name: 'Echo' },
+    { id: '8', name: 'Quasar' },
+    { id: '9', name: 'Odyssey' },
+    { id: '10', name: 'Legacy' },
+];
+
 
   skills: any[] = [
     { name: 'Frontend' },
@@ -39,7 +47,7 @@ export class DirectorComponent {
 
   async submitRequest(formdata: any) {
     localStorage.setItem("reqs", JSON.stringify(formdata.value));
-    this.dir_id = Number(localStorage.getItem('userId')) || 0;
+    this.dir_id = Number(localStorage.getItem('dir_id')) || 0;
     formdata.value['dir_id'] = this.dir_id;
 
     console.log(formdata.value);
