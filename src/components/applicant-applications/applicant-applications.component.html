@@ -1,0 +1,30 @@
+<div class="applications-container">
+    <h2>Your Applications</h2>
+    <table *ngIf="applications.length; else noApplications" class="applications-table">
+      <thead>
+        <tr>
+          <th>Job Title</th>
+          <th>Status</th>
+          <th>Application Date</th>
+          <th>Last Updated</th>
+          <th>Skills</th>
+          <th>Cover Letter</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let application of applications">
+          <td>{{ application.jobTitle }}</td>
+          <td>{{ application.status }}</td>
+          <td>{{ application.applicationDate | date }}</td>
+          <td>{{ application.lastUpdated | date }}</td>
+          <td>{{ application.skills }}</td>
+          <td>{{ application.coverLetter }}</td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <ng-template #noApplications>
+      <p>No applications found.</p>
+    </ng-template>
+  </div>
+  

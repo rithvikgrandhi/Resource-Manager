@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -7,39 +7,83 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { NgIf } from '@angular/common';
 
+import { JobPost } from '../list-job-posts/list-job-posts.component';
+import { ApiCallService } from '../services/api-call.service';
+
+export interface Application {
+  applicationId: number
+  userId: number;
+  jobPostId: number;
+  skills: string;
+  status: string;
+  applicationDate: Date;
+  lastUpdated: Date;
+  coverLetter: string;
+}
+
 @Component({
   selector: 'app-job-application',
   standalone: true,
-  imports: [FormsModule, MatCardModule, MatFormFieldModule, MatInputModule, MatButtonModule, NgIf],
+  imports: [
+    FormsModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    NgIf,
+  ],
   templateUrl: './application.component.html',
-  styleUrls: ['./application.component.css']
+  styleUrls: ['./application.component.css'],
 })
-export class ApplicationComponent {
+export class ApplicationComponent implements OnInit {
   model: any = {
-    fullName: '',
-    email: '',
-    phone: '',
-    jobPostId: '',
-    resume: ''
+    userId: localStorage.getItem('userId'), // Assume a logged-in user with id 1 for now
+    jobPostId: 0,
+    skills: '',
+    status: 'Applied',
+    applicationDate: new Date(),
+    lastUpdated: new Date(),
+    coverLetter: '',
   };
-  formSubmitted: boolean = false;
-  applicationMessage: string = '';
 
-  constructor(private router: Router) {}
+  jobPostId!: number;
+  jobpost!: JobPost; // Ensure jobpost is initialized
 
-  onSubmit() {
-    this.formSubmitted = true; // Track submission state
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private apiService: ApiCallService
+  ) {}
 
-    if (this.isFormValid()) {
-      // Handle successful application logic
-      this.applicationMessage = 'Application submitted successfully!';
-      this.router.navigate(['/success']); // Navigate to a success page or similar
-    } else {
-      this.applicationMessage = 'Please fill in all required fields.';
-    }
+  /**
+   * Lifecycle hook to get the job ID from the route and populate the
+   * form with the job title and skills required for the job.
+   */
+  ngOnInit(): void {
+    this.jobPostId = +this.route.snapshot.paramMap.get('jobPostId')!;
+    
+    // Fetch job post details by jobPostId
+    this.apiService.getJobPostById(this.jobPostId).subscribe(
+      (data: JobPost) => {
+        console.log(data);
+        this.jobpost = data; // Set jobpost data
+        this.model.jobPostId = this.jobPostId; // Set job_post_id for submission
+      },
+      (error) => {
+        console.error('Error fetching job post details:', error);
+      }
+    );
   }
 
-  isFormValid() {
-    return Object.values(this.model).every(x => x !== '');
+  /**
+   * Handles form submission
+   */
+  onSubmit() {
+    // Update model with current time
+    this.model.lastUpdated = new Date();
+
+    // Call API service to submit the form data
+    this.apiService.submitApplication(this.model)
+    this.router.navigateByUrl(`/myapplications/${localStorage.getItem('userId')}`)
   }
 }

@@ -12,6 +12,7 @@ body {
 }
 
 .card {
+  padding: 1%;
   background-color: #fff; /* White background for the card */
   border-radius: 8px; /* Rounded corners */
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */

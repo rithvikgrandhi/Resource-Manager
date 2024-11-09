@@ -4,10 +4,10 @@
             <h2>Login</h2>
 
             <div class="form-field">
-                <label for="username">Username</label>
-                <input type="text" id="username" required [(ngModel)]="model.username" name="username" />
-                <div class="error-message" *ngIf="loginForm.controls['username']?.invalid && (loginForm.controls['username']?.touched || loginForm.controls['username']?.dirty)">
-                    Username is required.
+                <label for="userName">username</label>
+                <input type="text" id="userName" required [(ngModel)]="model.userName" name="userName" />
+                <div class="error-message" *ngIf="loginForm.controls['userName']?.invalid && (loginForm.controls['userName']?.touched || loginForm.controls['userName']?.dirty)">
+                    userName is required.
                 </div>
             </div>
 

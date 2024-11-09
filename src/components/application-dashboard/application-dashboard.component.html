@@ -1,16 +1,31 @@
 <div class="applicant-dashboard-card">
-    <h2>Applicant Dashboard</h2>
+  <h2>Applicant Dashboard</h2>
 
-    <div *ngIf="applicants.length === 0" class="no-applicants-message">
-        No applicants available.
-    </div>
+  <div *ngIf="applications.length === 0" class="no-applicants-message">
+    No applicants available.
+  </div>
 
-    <div class="applicant-cards" *ngIf="applicants.length > 0">
-        <div class="applicant-card" *ngFor="let applicant of applicants">
-            <h3>{{ applicant.fullName }}</h3>
-            <p><strong>Email:</strong> {{ applicant.email }}</p>
-            <p><strong>Phone:</strong> {{ applicant.phone }}</p>
-            <p><strong>Status:</strong> {{ applicant.status }}</p>
-        </div>
+  <div class="applicant-cards" *ngIf="applications.length > 0">
+    <div class="applicant-card" *ngFor="let applicant of applications">
+      <h3>{{ applicant.fullName }}</h3>
+      <p><strong>Email:</strong> {{ applicant.email }}</p>
+      <p>
+        <strong>Application Date:</strong>
+        {{ applicant.applicationDate | date }}
+      </p>
+      <p><strong>Skills:</strong> {{ applicant.skills }}</p>
+      <p><strong>Last Updated:</strong> {{ applicant.lastUpdated | date }}</p>
+      <p>
+        <strong>Status:</strong>
+        <select [(ngModel)]="applicant.status">
+          <option *ngFor="let status of statusOptions" [value]="status">
+            {{ status }}
+          </option>
+        </select>
+      </p>
+      <button (click)="updateStatus(applicant, applicant.status)">
+        Update Status
+      </button>
     </div>
+  </div>
 </div>

@@ -1,57 +1,32 @@
-<form class="application-form" (ngSubmit)="onSubmit()" #applicationForm="ngForm" novalidate>
-    <div class="application-card">
-        <h2>Job Application</h2>
+<form class="application-form" (ngSubmit)="onSubmit()" #appForm="ngForm" novalidate>
 
-        <div *ngIf="applicationMessage" class="application-message alert">
-            {{ applicationMessage }}
-        </div>
+  <!-- Job Title -->
+  <div class="form-field">
+      <label for="job_title">Job Title</label>
+      <input type="text" id="job_title" [value]="jobpost.title" disabled />
+  </div>
 
-        <div *ngIf="formSubmitted && applicationForm.invalid" class="error-message">
-            Please fill in all required fields.
-        </div>
+  <!-- Skills -->
+  <div class="form-field">
+      <label for="skills">Skills</label>
+      <input type="text" id="skills" required [(ngModel)]="model.skills" name="skills" />
+      <div class="error-message" *ngIf="appForm.controls['skills']?.invalid && (appForm.controls['skills']?.touched || appForm.controls['skills']?.dirty)">
+          Skills are required.
+      </div>
+  </div>
 
-        <div class="form-field">
-            <label for="fullName">Full Name</label>
-            <input type="text" id="fullName" required [(ngModel)]="model.fullName" name="fullName" />
-            <div class="error-message" *ngIf="applicationForm.controls['fullName']?.invalid && (applicationForm.controls['fullName']?.touched || applicationForm.controls['fullName']?.dirty)">
-                Full name is required.
-            </div>
-        </div>
+  <!-- Cover Letter -->
+  <div class="form-field">
+      <label for="cover_letter">Cover Letter</label>
+      <textarea id="cover_letter" required [(ngModel)]="model.coverLetter" name="cover_letter" rows="5" cols="30"></textarea>
+      <div class="error-message" *ngIf="appForm.controls['cover_letter']?.invalid && (appForm.controls['cover_letter']?.touched || appForm.controls['cover_letter']?.dirty)">
+          Cover Letter is required.
+      </div>
+  </div>
+  
+  <!-- Submit Button -->
+  <div class="form-actions">
+      <button type="submit" class="submit-button" [disabled]="appForm.invalid">Submit Application</button>
+  </div>
 
-        <div class="form-field">
-            <label for="email">Email</label>
-            <input type="email" id="email" required [(ngModel)]="model.email" name="email" />
-            <div class="error-message" *ngIf="applicationForm.controls['email']?.invalid && (applicationForm.controls['email']?.touched || applicationForm.controls['email']?.dirty)">
-                A valid email is required.
-            </div>
-        </div>
-
-        <div class="form-field">
-            <label for="phone">Phone Number</label>
-            <input type="text" id="phone" required [(ngModel)]="model.phone" name="phone" />
-            <div class="error-message" *ngIf="applicationForm.controls['phone']?.invalid && (applicationForm.controls['phone']?.touched || applicationForm.controls['phone']?.dirty)">
-                Phone number is required.
-            </div>
-        </div>
-
-        <div class="form-field">
-            <label for="jobPostId">Job Post ID</label>
-            <input type="text" id="jobPostId" required [(ngModel)]="model.jobPostId" name="jobPostId" />
-            <div class="error-message" *ngIf="applicationForm.controls['jobPostId']?.invalid && (applicationForm.controls['jobPostId']?.touched || applicationForm.controls['jobPostId']?.dirty)">
-                Job Post ID is required.
-            </div>
-        </div>
-
-        <div class="form-field">
-            <label for="resume">Resume (URL)</label>
-            <input type="text" id="resume" required [(ngModel)]="model.resume" name="resume" />
-            <div class="error-message" *ngIf="applicationForm.controls['resume']?.invalid && (applicationForm.controls['resume']?.touched || applicationForm.controls['resume']?.dirty)">
-                Resume URL is required.
-            </div>
-        </div>
-
-        <div class="form-actions">
-            <button class="submit-button" type="submit" (click)="formSubmitted = true" [disabled]="applicationForm.invalid">Apply</button>
-        </div>
-    </div>
 </form>

@@ -1,0 +1,22 @@
+<div class="job-post-details">
+  <h2>{{ jobPost.title }}</h2>
+
+  <p><strong>Description:</strong> {{ jobPost.description }}</p>
+
+  <p><strong>Skills Required:</strong> {{ jobPost.skillsRequired }}</p>
+
+  <p>
+    <strong>Number of People Required:</strong>
+    {{ jobPost.numberOfPeopleRequired }}
+  </p>
+
+  <p><strong>Posted Date:</strong> {{ jobPost.postedDate | date }}</p>
+
+  <p><strong>Status:</strong> {{ jobPost.status }}</p>
+
+  <!-- Add a button to go back to the job postings list -->
+  <button (click)="goBack()">Back to Job Postings</button>
+
+  <!-- Add a button to fill out the job application form -->
+  <button *ngIf="isApplicant$ | async" (click)="applyForJob()">Apply for this Job</button>
+</div>
